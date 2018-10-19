@@ -1,15 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import HeaderImg from '../assets/images/header-bg.jpg'
+import Navigation from './Navigation';
 
 class HeaderLayout extends React.Component {
   render() {
     return (
       <Header imgSrc={HeaderImg}>
-        <Navigation>
-          <HomeLink to="/">Dayuan's Blog.</HomeLink>
-        </Navigation>
+        <Navigation />
         <HeaderContainer>
           <Title>Dayuan's Blog.</Title>
           <Remark>it's better to burn out than to fade away</Remark>
@@ -23,20 +21,8 @@ interface IHeader {
   imgSrc: string;
 }
 
-const Navigation = styled.nav`
-  position: relative;
-`
-const HomeLink = styled(Link)`
-  color: #fff;
-  padding: 20px;
-  line-height: 20px;
-  font-size: 18px;
-  text-decoration: none;
-  font-weight: 800;
-`
-
 const Header = styled.header`
-  position: absolute;
+  position: relative;
   background: no-repeat center center;
   background-image: url(${(props: IHeader) => props.imgSrc});
   background-color: #666;
@@ -47,13 +33,15 @@ const Header = styled.header`
 `
 
 const HeaderContainer = styled.div`
+  position: relative;
   max-width: 1000px;
-  margin: 100px auto 300px;
+  padding: 80px 0 300px;
+  margin: 0 auto;
   text-align: center;
 `
 
 const Title = styled.h1`
-  font-size: 80px;
+  font-size: 70px;
   line-height: 1.1;
   font-weight: 700;
   color: #fff;
