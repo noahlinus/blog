@@ -13,6 +13,6 @@
   },
   "rules": {
     "ordered-imports": false,
-    "member-access": false
+    "member-access": false,
   }
 }
