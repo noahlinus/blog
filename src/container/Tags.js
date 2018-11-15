@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, { Component } from 'react'
 
-class Tags extends React.Component {
+class Tags extends Component {
   render() {
     return (
       <div>

@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
 const NavList = [
@@ -12,16 +12,12 @@ const NavList = [
     src: '/about/',
   },
   {
-    name: 'ARCHIVES',
-    src: '/Archives/',
-  },
-  {
     name: 'TAGS',
     src: '/tags/',
   }
 ]
 
-class Navigation extends React.Component {
+class Navigation extends Component {
   getNavList() {
     return NavList.map((item) => (
       <NavLi key={item.name}>
@@ -94,3 +90,4 @@ const NavLink = styled(Link)`
 `
 
 export default Navigation
+

@@ -1,9 +1,10 @@
-import * as React from 'react';
+import React, { Component } from 'react'
+
 import styled from 'styled-components';
 import HeaderImg from '../assets/images/header-bg.jpg'
 import Navigation from './Navigation';
 
-class HeaderLayout extends React.Component {
+class HeaderLayout extends Component {
   render() {
     return (
       <Header imgSrc={HeaderImg}>
@@ -17,14 +18,10 @@ class HeaderLayout extends React.Component {
   }
 }
 
-interface IHeader {
-  imgSrc: string;
-}
-
 const Header = styled.header`
   position: relative;
   background: no-repeat center center;
-  background-image: url(${(props: IHeader) => props.imgSrc});
+  background-image: url(${(props) => props.imgSrc});
   background-color: #666;
   width: 100%;
   background-attachment: scroll;
