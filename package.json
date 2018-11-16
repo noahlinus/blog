@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.0",
+    "@babel/runtime": "^7.1.5",
     "@svgr/webpack": "2.4.1",
     "antd": "^3.10.5",
     "axios": "^0.18.0",
@@ -117,8 +118,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.1.0",
     "babel-plugin-styled-components": "^1.8.0",
     "redux-devtools": "^3.4.1"
-  },
-  "proxy": "https://api.github.com"
+  }
 }

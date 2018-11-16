@@ -7,12 +7,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    getIssues()
+    this.getIssues()
   }
 
   async getIssues() {
     const result = await getIssues({ page: 1, per_page: 15 })
-    this.setState({ issues: result })
+    console.log('lailailai',result)
+    this.setState({ issues: result.data })
   }
 
   render() {
