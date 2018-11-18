@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { Switch, Route } from 'react-router-dom'
-import Home from '../container/Home'
-import Tags from '../container/Tags';
-import About from '../container/About';
+import Home from '../containers/Home'
+import Tags from '../containers/Tags';
+import About from '../containers/About';
 
 function Routers() {
   return (
