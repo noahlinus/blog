@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import { getIssues } from '../api/github'
 import { getArticle } from '../action';
+import ArticleList from '../components/ArticleList';
 
 class Home extends Component {
   // state = {
@@ -21,14 +22,11 @@ class Home extends Component {
 
   render() {
     const { articles } = this.props
-    console.log(this.props)
     return (
       <div>
-        <ul>
-          {
-            articles.map((item,index) => <li key={`${index}`}>{item.title}</li>)
-          }
-        </ul>
+        <ArticleList
+          articles={articles}
+        />
       </div>
     )
   }

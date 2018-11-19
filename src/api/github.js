@@ -8,10 +8,4 @@ const fetch = axios.create({
   baseURL: `https://api.github.com/repos/${OWNER}/${REPO}/`,
 })
 
-export const getIssues = () => fetch.get('/issues', {
-  params: {
-    filter: 'created',
-    page: 1,
-    per_page: 15,
-  }
-})
+export const getIssues = (params) => fetch.get('/issues', { params })
