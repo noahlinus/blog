@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import moment from 'moment'
+import { Pagination, Spin } from 'antd'
 
 class ArticleList extends Component {
   renderList = articles => articles.map((item, index) => (
@@ -11,26 +13,49 @@ class ArticleList extends Component {
         {this.reviewText(item.body)}
       </PostContentPreview>
       <PostMeta>
-        Posted by lindayuan on 2018-10-03
+        Posted by lindayuan on {moment(item.created_at).format("YYYY-MM-DD")}
       </PostMeta>
     </PostContent>
   ))
 
-  reviewText = (text) => `${text.substring(0, 300)}...`
+  reviewText = (text) => `${text.substring(0, 300)} ......`
 
   render() {
-    const { articles } = this.props
+    console.log(this.props)
+    const { loading, articles } = this.props
+    const { data, pagination } = articles
+    if (loading) {
+      return (
+        <LoadingLayout>
+          <Spin size="large" />
+        </LoadingLayout>
+      )
+    }
     return (
-      <div>
+      <PostContainer>
         {
-          this.renderList(articles)
+          this.renderList(data)
         }
-      </div>
+        <PaginationContainer>
+          <Pagination
+            current={pagination.current}
+            pageSize={pagination.pageSize}
+            total={pagination.total}
+            onChange={this.props.onChange}
+          />
+        </PaginationContainer>
+      </PostContainer>
     )
   }
 }
 
+const PostContainer = styled.div`
+  margin: 30px 0 120px;
+  position: relative;
+`
+
 const PostContent = styled.div`
+  padding: 18px 0 10px;
   border-bottom: 1px solid #eee;
 `
 
@@ -43,16 +68,31 @@ const PostTitle = styled.h1`
 const PostContentPreview = styled.div`
   font-style: italic;
   color: #a3a3a3;
-  min-height: 100px; 
+  min-height: 80px; 
   overflow: hidden;
+  font-size: 13px;
   text-overflow: ellipsis;
 `
 
 const PostMeta = styled.p`
   font-family: 'Lora','Times New Roman',serif;
-  color: gray;
+  color: #ccc;
   font-size: 16px;
   font-style: italic;
+`
+
+const PaginationContainer = styled.div`
+  margin: 20px 0;
+  position: absolute;
+  right: 10px;
+`
+
+const LoadingLayout = styled.div`
+  text-align: center;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 50px 100px;
+  margin: 20px 0;
 `
 
 export default ArticleList

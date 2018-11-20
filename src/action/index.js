@@ -1,6 +1,6 @@
 import ActionTypes from "./actionTypes";
 
-export const getArticle = articles => ({
+export const getArticle = payload => ({
   type: ActionTypes.GET_ARTICLES,
-  articles
+  payload,
 })

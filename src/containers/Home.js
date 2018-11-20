@@ -14,18 +14,21 @@ class Home extends Component {
   }
 
   getIssues() {
-    // const result = await getIssues({ page: 1, per_page: 15 })
-    // console.log('lailailai', result)
-    this.props.getArticle([])
-    // this.setState({ issues: result.data })
+    this.props.getArticle({ current: 1, pageSize: 10 })
+  }
+
+  onChange = (current, pageSize) => {
+    this.props.getArticle({ current, pageSize })
   }
 
   render() {
-    const { articles } = this.props
+    const { articles, loading } = this.props
     return (
       <div>
         <ArticleList
           articles={articles}
+          loading={loading}
+          onChange={this.onChange}
         />
       </div>
     )
@@ -33,11 +36,12 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-  articles: state.article.articles
+  articles: state.article.articles,
+  loading: state.article.loading
 })
 
 const mapDispatchToProps = dispatch => ({
-  getArticle: articles => dispatch(getArticle(articles))
+  getArticle: data => dispatch(getArticle(data))
 })
 
 export default connect(

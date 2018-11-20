@@ -3,6 +3,7 @@ import HeaderLayout from '../components/HeaderLayout';
 import { BrowserRouter as Router } from 'react-router-dom'
 import styled from 'styled-components'
 import Routers from '../route'
+import Footer from '../components/Footer';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <Container>
             <Routers />
           </Container>
+          <Footer />
         </div>
       </Router>
     )
