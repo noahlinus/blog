@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import ActionTypes from './actionTypes';
 import { getIssues } from '../api/github';
 
-export function* getArticle(action) {
+function* getArticle(action) {
   const { current, pageSize } = action.payload
   try {
     const result = yield call(() => getIssues({
@@ -22,12 +22,12 @@ export function* getArticle(action) {
         }
       })
     } else {
-      yield put({type: ActionTypes.GET_ARTICLES_FAILED })
+      yield put({ type: ActionTypes.GET_ARTICLES_FAILED })
     }
   } catch (error) {
-    yield put({type: ActionTypes.GET_ARTICLES_FAILED })
+    yield put({ type: ActionTypes.GET_ARTICLES_FAILED })
   }
-  
+
 }
 
 function* rootSaga() {

@@ -18,11 +18,11 @@ const article = (state = initArticle, action) => {
       const { link } = action.payload
       let linkData = getLinkData(link)
       console.log('linkData', linkData)
-      let total = 10
+      let total = action.total
       if (linkData['last']) {
-        total = linkData['last'].page * 10
+        total = linkData['last'].page * linkData['last'].per_page
       } else if (linkData['prev']) {
-        total = linkData['prev'].page * 10 + 10
+        total = linkData['prev'].page * linkData['last'].per_page + linkData['last'].per_page
       }
       console.log('action',action)
       return {

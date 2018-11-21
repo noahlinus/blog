@@ -24,26 +24,29 @@ class ArticleList extends Component {
     console.log(this.props)
     const { loading, articles } = this.props
     const { data, pagination } = articles
-    if (loading) {
-      return (
-        <LoadingLayout>
-          <Spin size="large" />
-        </LoadingLayout>
-      )
-    }
     return (
       <PostContainer>
         {
           this.renderList(data)
         }
-        <PaginationContainer>
-          <Pagination
-            current={pagination.current}
-            pageSize={pagination.pageSize}
-            total={pagination.total}
-            onChange={this.props.onChange}
-          />
-        </PaginationContainer>
+        {
+          pagination.total > pagination.pageSize &&
+          <PaginationContainer>
+            {loading && <Spin size="small" />}
+            <Pagination
+              current={pagination.current}
+              pageSize={pagination.pageSize}
+              total={pagination.total}
+              onChange={this.props.onChange}
+            />
+          </PaginationContainer>
+        }
+        {
+          loading &&
+          <LoadingLayout>
+            <Spin size="large" />
+          </LoadingLayout>
+        }
       </PostContainer>
     )
   }
@@ -51,6 +54,7 @@ class ArticleList extends Component {
 
 const PostContainer = styled.div`
   margin: 30px 0 120px;
+  min-height: 200px;
   position: relative;
 `
 
@@ -83,13 +87,27 @@ const PostMeta = styled.p`
 
 const PaginationContainer = styled.div`
   margin: 20px 0;
-  position: absolute;
+  padding: 0 20px;
   right: 10px;
+  text-align: center;
+  position: relative;
+  .ant-spin-spinning{
+    margin-top: 8px;
+    margin-left: -20px;
+    position: absolute;
+  }
+  .ant-pagination {
+    display: inline-block;
+  }
 `
 
 const LoadingLayout = styled.div`
+  position: absolute;
   text-align: center;
   border-radius: 4px;
+  top: 20px;
+  left: 0;
+  right: 0;
   margin-bottom: 20px;
   padding: 50px 100px;
   margin: 20px 0;
