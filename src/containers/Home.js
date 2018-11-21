@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { getIssues } from '../api/github'
-import { getArticle } from '../action';
-import ArticleList from '../components/ArticleList';
+import styled from 'styled-components'
+import { getArticle } from '../action'
+import ArticleList from '../components/ArticleList'
+
+const LeftContainer = styled.div`
+  width: 800px;
+`
+
+const RightContainer = styled.div`
+  width: 200px;
+`
 
 class Home extends Component {
-  willCurrent= -1
+  willCurrent = -1
 
   componentDidMount() {
     this.props.getArticle({ current: 1, pageSize: 10 })
@@ -29,15 +37,21 @@ class Home extends Component {
     const { articles, loading } = this.props
     return (
       <div>
-        <ArticleList
-          articles={articles}
-          loading={loading}
-          onChange={this.onChange}
-        />
+        <LeftContainer>
+          <ArticleList
+            articles={articles}
+            loading={loading}
+            onChange={this.onChange}
+          />
+        </LeftContainer>
+        <RightContainer>
+
+        </RightContainer>
       </div>
     )
   }
 }
+
 
 const mapStateToProps = state => ({
   articles: state.article.articles,

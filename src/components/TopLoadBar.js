@@ -9,10 +9,22 @@ class TopLoadBar extends Component {
   }
 
   timeInterval = null
+  myTimeout = null
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.loading !== nextProps.loading && nextProps.loading) {
+      this.beginProgress()
+    } else {
+      this.stopProgress()
+    }
+  }
 
   beginProgress() {
     if (this.timeInterval) {
       clearInterval(this.timeInterval)
+    }
+    if (this.myTimeout) {
+      clearTimeout(this.myTimeout)
     }
     let temp = 0.5
     this.setState({
@@ -25,13 +37,12 @@ class TopLoadBar extends Component {
       this.setState({
         progress: willProgress,
       })
-      if (willProgress < 25) {
-        temp = 0.6
+      if (willProgress < 35) {
+        temp = 1
+      } else if (willProgress > 35) {
+        temp = 0.3
       }
-      if (willProgress > 25) {
-        temp = 0.2
-      }
-      if (willProgress >= 85) {
+      if (willProgress >= 90) {
         clearInterval(this.timeInterval)
         // this.stopProgress()
       }
@@ -42,9 +53,12 @@ class TopLoadBar extends Component {
     if (this.timeInterval) {
       clearInterval(this.timeInterval)
     }
-    let temp = 0.8
+    if (this.myTimeout) {
+      clearTimeout(this.myTimeout)
+    }
+    let temp = 1
     this.setState({
-      progress: 85
+      progress: 90
     })
     this.timeInterval = setInterval(() => {
       const { progress } = this.state
@@ -55,8 +69,16 @@ class TopLoadBar extends Component {
       if (willProgress >= 100) {
         clearInterval(this.timeInterval)
         this.setState({
-          show: false,
+          show: false
+        }, () => {
+          this.myTimeout = setTimeout(() => {
+            console.log('myTimeout')
+            this.setState({
+              progress: 0
+            })
+          }, 1000);
         })
+        
       }
     }, 40)
   }
@@ -69,7 +91,7 @@ class TopLoadBar extends Component {
           percent={progress}
           strokeLinecap="square"
           status="active"
-          strokeWidth="5px"
+          strokeWidth={5}
           showInfo={false}
         />
       </TopLoadBarContainer>
@@ -84,7 +106,7 @@ const TopLoadBarContainer = styled.div`
   z-index: 40;
   left: 0;
   opacity: ${props => props.show ? 1 : 0};
-  transition: ${props => props.show ? 'opacity .2s linear .2s;' : 'opacity .4s linear .4s;'};
+  transition: ${props => props.show ? 'none' : 'opacity .4s linear .4s;'};
   .ant-progress-inner {
     background-color: transparent;
   }

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from "redux"
 import createSagaMiddleware from 'redux-saga'
-import { BrowserRouter as Router } from 'react-router-dom'
 
 import './index.css';
 import App from './containers/App';
@@ -22,9 +21,7 @@ sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById('root')
 )

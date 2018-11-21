@@ -1,46 +1,43 @@
 import React, { Component } from 'react';
-import HeaderLayout from '../components/HeaderLayout';
-import { BackTop, Button } from 'antd'
+import HeaderLayout from '../components/HeaderLayout'
+import { BackTop } from 'antd'
 import styled from 'styled-components'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Routers from '../route'
-import Footer from '../components/Footer';
-import TopLoadBar from '../components/TopLoadBar';
+import Footer from '../components/Footer'
+import TopLoadBar from '../components/TopLoadBar'
 
 class App extends Component {
-  constructor() {
-    super()
-    this.topLoadBar = React.createRef()
-  }
-
-  beginProgress= ()=> {
-    this.topLoadBar.current.beginProgress()
-  }
-
-  stopProgress= ()=> {
-    this.topLoadBar.current.stopProgress()
-  }
-
   render() {
+    const { loading } = this.props
+    console.log(loading)
     return (
-      <div>
-        <TopLoadBar ref={this.topLoadBar} />
-        <HeaderLayout />
-        <Container>
-          <Routers />
-        </Container>
-        <BackTop />
-        <Footer />
-        <Button onClick={this.beginProgress}>开始</Button>
-        <Button onClick={this.stopProgress}>结束</Button>
-      </div>
+      <Router>
+        <div>
+          <TopLoadBar loading={loading} />
+          <HeaderLayout />
+          <Container>
+            <Routers />
+          </Container>
+          <BackTop />
+          <Footer />
+        </div>
+      </Router>
     )
   }
 }
 
 const Container = styled.article`
   position: relative;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 `
 
-export default App;
+const mapStateToProps = state => ({
+  loading: state.article.loading
+})
+
+export default connect(
+  mapStateToProps
+)(App);

@@ -32,7 +32,6 @@ class ArticleList extends Component {
         {
           pagination.total > pagination.pageSize &&
           <PaginationContainer>
-            {loading && <Spin size="small" />}
             <Pagination
               current={pagination.current}
               pageSize={pagination.pageSize}
@@ -91,11 +90,6 @@ const PaginationContainer = styled.div`
   right: 10px;
   text-align: center;
   position: relative;
-  .ant-spin-spinning{
-    margin-top: 8px;
-    margin-left: -20px;
-    position: absolute;
-  }
   .ant-pagination {
     display: inline-block;
   }

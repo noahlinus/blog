@@ -22,7 +22,7 @@ const article = (state = initArticle, action) => {
       if (linkData['last']) {
         total = linkData['last'].page * linkData['last'].per_page
       } else if (linkData['prev']) {
-        total = linkData['prev'].page * linkData['last'].per_page + linkData['last'].per_page
+        total = linkData['prev'].page * linkData['prev'].per_page + Number(linkData['prev'].per_page)
       }
       console.log('action',action)
       return {
