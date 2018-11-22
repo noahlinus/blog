@@ -21,7 +21,6 @@ class ArticleList extends Component {
   reviewText = (text) => `${text.substring(0, 300)} ......`
 
   render() {
-    console.log(this.props)
     const { loading, articles } = this.props
     const { data, pagination } = articles
     return (

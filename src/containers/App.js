@@ -35,7 +35,7 @@ const Container = styled.article`
 `
 
 const mapStateToProps = state => ({
-  loading: state.article.loading
+  loading: state.global.loading
 })
 
 export default connect(

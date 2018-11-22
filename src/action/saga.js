@@ -1,8 +1,10 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import ActionTypes from './actionTypes';
 import { getIssues } from '../api/github';
+import { changeGlobalLoading } from '.';
 
 function* getArticle(action) {
+  yield startLoading(true)
   const { current, pageSize } = action.payload
   try {
     const result = yield call(() => getIssues({
@@ -27,11 +29,24 @@ function* getArticle(action) {
   } catch (error) {
     yield put({ type: ActionTypes.GET_ARTICLES_FAILED })
   }
+  yield startLoading(false)
+}
 
+function* getTags(action) {
+
+} 
+
+function* startLoading(isLoading) {
+  yield put(changeGlobalLoading(isLoading))
+}
+
+function* watchFetchProducts() {
+  yield takeEvery(ActionTypes.GET_ARTICLES, getArticle)
+  yield takeEvery(ActionTypes.GET_TAGS, getTags)
 }
 
 function* rootSaga() {
-  yield takeEvery(ActionTypes.GET_ARTICLES, getArticle)
+  yield watchFetchProducts()
 }
 
 export default rootSaga

@@ -17,14 +17,12 @@ const article = (state = initArticle, action) => {
     case ActionTypes.GET_ARTICLES_SUCCESS:
       const { link } = action.payload
       let linkData = getLinkData(link)
-      console.log('linkData', linkData)
       let total = action.total
       if (linkData['last']) {
         total = linkData['last'].page * linkData['last'].per_page
       } else if (linkData['prev']) {
         total = linkData['prev'].page * linkData['prev'].per_page + Number(linkData['prev'].per_page)
       }
-      console.log('action',action)
       return {
         ...state,
         articles: {
