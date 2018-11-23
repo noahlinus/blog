@@ -11,7 +11,6 @@ import TopLoadBar from '../components/TopLoadBar'
 class App extends Component {
   render() {
     const { loading } = this.props
-    console.log(loading)
     return (
       <Router>
         <div>
@@ -30,7 +29,8 @@ class App extends Component {
 
 const Container = styled.article`
   position: relative;
-  max-width: 1000px;
+  max-width: 1100px;
+  text-align: center;
   margin: 0 auto;
 `
 

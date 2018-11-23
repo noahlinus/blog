@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import ActionTypes from './actionTypes';
-import { getIssues } from '../api/github';
+import { getIssues, getLabels } from '../api/github';
 import { changeGlobalLoading } from '.';
 
 function* getArticle(action) {
@@ -33,7 +33,8 @@ function* getArticle(action) {
 }
 
 function* getTags(action) {
-
+  const res = yield call(() => getLabels()) 
+  console.log(res)
 } 
 
 function* startLoading(isLoading) {

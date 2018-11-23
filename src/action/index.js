@@ -9,3 +9,7 @@ export const changeGlobalLoading = loading => ({
   type: ActionTypes.GLOBAL_LOADING,
   loading,
 })
+
+export const getTags = () => ({
+  type: ActionTypes.GET_TAGS
+})

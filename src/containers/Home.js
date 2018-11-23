@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { getArticle } from '../action'
+import { getArticle, getTags } from '../action'
 import ArticleList from '../components/ArticleList'
 
 const LeftContainer = styled.div`
@@ -17,6 +17,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getArticle({ current: 1, pageSize: 10 })
+    this.props.getTags()
   }
 
   componentDidUpdate() {
@@ -59,7 +60,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getArticle: data => dispatch(getArticle(data))
+  getArticle: data => dispatch(getArticle(data)),
+  getTags: data => dispatch(getTags())
 })
 
 export default connect(
