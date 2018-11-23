@@ -6,10 +6,13 @@ import ArticleList from '../components/ArticleList'
 
 const LeftContainer = styled.div`
   width: 800px;
+  display: inline-block;
 `
 
 const RightContainer = styled.div`
   width: 200px;
+  margin-left: 50px;
+  display: inline-block;
 `
 
 class Home extends Component {
