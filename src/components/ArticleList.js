@@ -84,9 +84,7 @@ const PostMeta = styled.p`
 `
 
 const PaginationContainer = styled.div`
-  margin: 20px 0;
-  padding: 0 20px;
-  right: 10px;
+  margin: 20px auto;
   text-align: center;
   position: relative;
   .ant-pagination {

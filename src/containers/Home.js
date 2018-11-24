@@ -4,17 +4,6 @@ import styled from 'styled-components'
 import { getArticle, getTags } from '../action'
 import ArticleList from '../components/ArticleList'
 
-const LeftContainer = styled.div`
-  width: 800px;
-  display: inline-block;
-`
-
-const RightContainer = styled.div`
-  width: 200px;
-  margin-left: 50px;
-  display: inline-block;
-`
-
 class Home extends Component {
   willCurrent = -1
 
@@ -40,7 +29,7 @@ class Home extends Component {
   render() {
     const { articles, loading } = this.props
     return (
-      <div>
+      <HomeContainer>
         <LeftContainer>
           <ArticleList
             articles={articles}
@@ -51,11 +40,25 @@ class Home extends Component {
         <RightContainer>
 
         </RightContainer>
-      </div>
+      </HomeContainer>
     )
   }
 }
 
+const LeftContainer = styled.div`
+  width: 800px;
+  display: inline-block;
+`
+
+const RightContainer = styled.div`
+  margin-left: 50px;
+  display: inline-block;
+`
+
+const HomeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 const mapStateToProps = state => ({
   articles: state.article.articles,

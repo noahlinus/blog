@@ -29,8 +29,6 @@ class App extends Component {
 
 const Container = styled.article`
   position: relative;
-  max-width: 1100px;
-  text-align: center;
   margin: 0 auto;
 `
 

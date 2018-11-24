@@ -62,7 +62,6 @@ const HomeLink = styled(Link)`
 
 const NavUl = styled.ul`
   position: absolute;
-  top: 0px;
   right: 0px;
   width: auto;
 `
