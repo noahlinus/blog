@@ -72,7 +72,6 @@ class TopLoadBar extends Component {
           show: false
         }, () => {
           this.myTimeout = setTimeout(() => {
-            console.log('myTimeout')
             this.setState({
               progress: 0
             })

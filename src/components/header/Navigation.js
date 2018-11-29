@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import Config from '../../config'
 
 const NavList = [
   {
@@ -34,7 +35,7 @@ class Navigation extends Component {
         <NavUl>
           {this.getNavList()}
         </NavUl>
-        <HomeLink to="/">Dayuan's Blog.</HomeLink>
+        <HomeLink to="/">{Config.title}.</HomeLink>
       </Nav>
     )
   }

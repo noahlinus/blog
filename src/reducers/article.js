@@ -10,26 +10,31 @@ const initArticle = {
       total: 10,
     },
   },
+  articleContent: null,
+  tags: [],
 }
 
 const article = (state = initArticle, action) => {
   switch (action.type) {
     case ActionTypes.GET_ARTICLES_SUCCESS:
-      const { link } = action.payload
-      let linkData = getLinkData(link)
       let total = action.total
-      if (linkData['last']) {
-        total = linkData['last'].page * linkData['last'].per_page
-      } else if (linkData['prev']) {
-        total = linkData['prev'].page * linkData['prev'].per_page + Number(linkData['prev'].per_page)
+      const { articles } = action
+      const { link } = articles
+      if (link) {
+        let linkData = getLinkData(link)
+        if (linkData['last']) {
+          total = linkData['last'].page * linkData['last'].per_page
+        } else if (linkData['prev']) {
+          total = linkData['prev'].page * linkData['prev'].per_page + Number(linkData['prev'].per_page)
+        }
       }
       return {
         ...state,
         articles: {
-          data: action.payload.data,
+          data: articles.data,
           pagination: {
-            current: action.payload.current,
-            pageSize: action.payload.pageSize,
+            current: articles.current,
+            pageSize: articles.pageSize,
             total,
           },
         },
@@ -45,6 +50,16 @@ const article = (state = initArticle, action) => {
         ...state,
         loading: false,
       }
+    case ActionTypes.GET_TAGS:
+      return {
+        ...state,
+        tags: action.tags
+      }
+    case ActionTypes.GET_ARTICLE_CONTENT:
+      return {
+        ...state,
+        articleContent: action.articleContent
+      }
     default:
       return state
   }
@@ -54,7 +69,7 @@ function getLinkData(link) {
   let pagedata = {}
   link.split(',').forEach(element => {
     let temp = element.split('?')[1].split(';')
-    let key = temp[1].split('=')[1].replace(/"/g,"")
+    let key = temp[1].split('=')[1].replace(/"/g, "")
     let datas = {}
     temp[0].split('&').forEach(item => {
       let data = item.split('=')

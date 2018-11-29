@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
 import styled from 'styled-components';
-import HeaderImg from '../assets/images/header-bg.jpg'
+import HeaderImg from '../../assets/images/header-bg.jpg'
 import Navigation from './Navigation';
+import Config from '../../config'
 
 class HeaderLayout extends Component {
   render() {
@@ -10,8 +11,8 @@ class HeaderLayout extends Component {
       <Header imgSrc={HeaderImg}>
         <Navigation />
         <HeaderContainer>
-          <Title>Dayuan's Blog.</Title>
-          <Remark>it's better to burn out than to fade away</Remark>
+          <Title>{Config.title}</Title>
+          <Remark>{Config.subtitle}</Remark>
         </HeaderContainer>
       </Header>
     )

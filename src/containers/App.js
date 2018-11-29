@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import HeaderLayout from '../components/HeaderLayout'
+import HeaderLayout from '../components/header/HeaderLayout'
 import { BackTop } from 'antd'
 import styled from 'styled-components'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Routers from '../route'
-import Footer from '../components/Footer'
-import TopLoadBar from '../components/TopLoadBar'
+import Footer from '../components/common/Footer'
+import TopLoadBar from '../components/common/TopLoadBar'
 
 class App extends Component {
   render() {

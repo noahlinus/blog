@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { getArticle, getTags } from '../action'
-import ArticleList from '../components/ArticleList'
+import { getArticleList, getTags } from '../action'
+import ArticleList from '../components/articlelist/ArticleList'
+import UserInfo from '../components/articlelist/UserInfo';
 
 class Home extends Component {
   willCurrent = -1
 
   componentDidMount() {
-    this.props.getArticle({ current: 1, pageSize: 10 })
+    this.props.getArticleList({ current: 1, pageSize: 10 })
     this.props.getTags()
   }
 
   componentDidUpdate() {
     const { pagination } = this.props.articles
-
     if (this.willCurrent === pagination.current) {
       this.willCurrent = -1
       window.scrollTo(0, 0)
@@ -23,11 +23,11 @@ class Home extends Component {
 
   onChange = (current, pageSize) => {
     this.willCurrent = current
-    this.props.getArticle({ current, pageSize })
+    this.props.getArticleList({ current, pageSize })
   }
 
   render() {
-    const { articles, loading } = this.props
+    const { articles, tags, loading } = this.props
     return (
       <HomeContainer>
         <LeftContainer>
@@ -38,7 +38,9 @@ class Home extends Component {
           />
         </LeftContainer>
         <RightContainer>
-
+          <UserInfo
+            tags={tags}
+          />
         </RightContainer>
       </HomeContainer>
     )
@@ -62,12 +64,13 @@ const HomeContainer = styled.div`
 
 const mapStateToProps = state => ({
   articles: state.article.articles,
+  tags: state.article.tags,
   loading: state.article.loading
 })
 
 const mapDispatchToProps = dispatch => ({
-  getArticle: data => dispatch(getArticle(data)),
-  getTags: data => dispatch(getTags())
+  getArticleList: data => dispatch(getArticleList(data)),
+  getTags: () => dispatch(getTags())
 })
 
 export default connect(

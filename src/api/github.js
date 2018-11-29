@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-const OWNER = 'lifesinger'
+const OWNER = 'LinYouYuan'
 
-const REPO = 'lifesinger.github.com'
+const REPO = 'linyouyuan.github.io'
 
 const fetch = axios.create({
   baseURL: `https://api.github.com/repos/${OWNER}/${REPO}/`,
@@ -29,3 +29,5 @@ const fetch = axios.create({
 export const getIssues = (params) => fetch.get('/issues', { params })
 
 export const getLabels = (params) => fetch.get('/labels', { params })
+
+export const getSingleIssue = (number) => fetch.get(`/issues/${number}`)

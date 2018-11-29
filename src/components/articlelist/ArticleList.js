@@ -2,23 +2,39 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import { Pagination, Spin } from 'antd'
+import TagList from '../common/TagList'
+import { withRouter } from 'react-router-dom'
+
 
 class ArticleList extends Component {
-  renderList = articles => articles.map((item, index) => (
+  handleArticleClick(number) {
+    this.props.history.push({
+      pathname: '/article',
+      search: `${number}`
+    })
+  }
+
+  renderList = articles => articles.map((item) => (
     <PostContent key={`${item.id}`}>
-      <PostTitle>
-        {item.title}
-      </PostTitle>
-      <PostContentPreview>
-        {this.reviewText(item.body)}
-      </PostContentPreview>
+      <PostContentData onClick={() => this.handleArticleClick(item.number)}>
+        <PostTitle>
+          {item.title}
+        </PostTitle>
+        <PostContentPreview>
+          {this.reviewText(item.body)}
+        </PostContentPreview>
+      </PostContentData>
       <PostMeta>
         Posted by lindayuan on {moment(item.created_at).format("YYYY-MM-DD")}
       </PostMeta>
+      <TagContainer>
+        <TagList tags={item.labels} />
+      </TagContainer>
+
     </PostContent>
   ))
 
-  reviewText = (text) => `${text.substring(0, 300)} ......`
+  reviewText = (text) => `${text.substring(0, 300).replace(/#/g, '')}...`
 
   render() {
     const { loading, articles } = this.props
@@ -57,8 +73,19 @@ const PostContainer = styled.div`
 `
 
 const PostContent = styled.div`
-  padding: 18px 0 10px;
+  padding: 10px 0 20px;
   border-bottom: 1px solid #eee;
+`
+
+const PostContentData = styled.div`
+  padding: 10px 5px;
+  cursor: pointer;
+  &:hover{
+    background: #E6F7FE;
+  }
+  &:active{
+    background: #B0E2FF;
+  }
 `
 
 const PostTitle = styled.h1`
@@ -68,18 +95,18 @@ const PostTitle = styled.h1`
 `
 
 const PostContentPreview = styled.div`
-  font-style: italic;
-  color: #a3a3a3;
+  color: #999;
   min-height: 80px; 
   overflow: hidden;
-  font-size: 13px;
+  font-size: 14px;
   text-overflow: ellipsis;
 `
 
 const PostMeta = styled.p`
   font-family: 'Lora','Times New Roman',serif;
-  color: #ccc;
-  font-size: 16px;
+  color: gray;
+  font-size: 18px;
+  margin: 5px;
   font-style: italic;
 `
 
@@ -103,5 +130,8 @@ const LoadingLayout = styled.div`
   padding: 50px 100px;
   margin: 20px 0;
 `
+const TagContainer = styled.div`
+  margin-left: 2px;
+`
 
-export default ArticleList
+export default withRouter(ArticleList)

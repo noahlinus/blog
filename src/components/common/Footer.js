@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components';
 import moment from 'moment'
+import InlineIcons from './InlineIcons';
 
 const Footer = () => (
   <FooterContainer>
+    <InlineIcons />
     <Copyright>
       Copyright © lindayuan {moment().format('YYYY')}
     </Copyright>
@@ -20,6 +22,7 @@ const FooterContainer = styled.footer`
 const Copyright = styled.p`
   font-size: 12px;
   text-align: center;
+  margin-top: 10px;
   margin-bottom: 0;
   font-style: italic;
 `
