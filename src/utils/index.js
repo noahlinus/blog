@@ -1,6 +1,5 @@
-export function scrollTop(scroll_top = 0) {
+export function scrollTop() {
   let scrollToptimer = setInterval(() => {
-    console.log("定时循环回到顶部")
     let top = document.body.scrollTop || document.documentElement.scrollTop;
     let speed = top / 4;
     if (document.body.scrollTop !== 0) {
@@ -8,8 +7,8 @@ export function scrollTop(scroll_top = 0) {
     } else {
       document.documentElement.scrollTop -= speed;
     }
-    if (top < scroll_top) {
+    if (top === 0) {
       clearInterval(scrollToptimer);
     }
-  }, 30);
+  }, 25);
 }

@@ -2,7 +2,6 @@ import ActionTypes from "./actionTypes"
 import { getIssues, getLabels, getSingleIssue } from '../api/github'
 
 export const getArticleList = articles => async (dispatch) => {
-  dispatch(startLoading(true))
   const { current, pageSize } = articles
   dispatch({ type: ActionTypes.GET_ARTICLES })
   try {
@@ -26,10 +25,8 @@ export const getArticleList = articles => async (dispatch) => {
       dispatch({ type: ActionTypes.GET_ARTICLES_FAILED })
     }
   } catch (error) {
-    dispatch(startLoading(false))
     dispatch({ type: ActionTypes.GET_ARTICLES_FAILED })
   }
-  dispatch(startLoading(false))
 }
 
 export const startLoading = loading => ({
@@ -38,7 +35,6 @@ export const startLoading = loading => ({
 })
 
 export const getTags = () => async (dispatch) => {
-  dispatch(startLoading(true))
   try {
     const res = await getLabels()
     dispatch({
@@ -46,9 +42,8 @@ export const getTags = () => async (dispatch) => {
       tags: res.data
     })
   } catch (error) {
-    dispatch(startLoading(false))
+    console.log(error)
   }
-  dispatch(startLoading(false))
 }
 
 export const getArticleContent = number => async (dispatch, getState) => {

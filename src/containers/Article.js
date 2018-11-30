@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import Markdown from '../components/article/Markdown'
 import { connect } from 'react-redux'
 import { getArticleContent } from '../action';
+import { Spin } from 'antd';
 
 class Article extends Component {
   componentDidMount() {
-    console.log(this.props)
     let { search } = this.props.location
     if (search) {
       const number = search.substring(1)
@@ -15,7 +15,7 @@ class Article extends Component {
   }
 
   render() {
-    const { articleContent } = this.props
+    const { articleContent, loading } = this.props
     let value = ''
     if (articleContent && articleContent.data && articleContent.data.body) {
       value = articleContent.data.body
@@ -23,9 +23,14 @@ class Article extends Component {
     return (
       <ArticleContainer>
         <ArticleContent>
-          <Markdown
-            value={value}
-          />
+          {loading ?
+            <LoadingContainer>
+              <Spin size="large" />
+            </LoadingContainer> :
+            <Markdown
+              value={value}
+            />
+          }
         </ArticleContent>
       </ArticleContainer>
     )
@@ -34,7 +39,8 @@ class Article extends Component {
 
 const mapStateToProps = state => (
   {
-    articleContent: state.article.articleContent
+    articleContent: state.article.articleContent,
+    loading: state.global.loading
   }
 )
 
@@ -50,6 +56,11 @@ const ArticleContainer = styled.article`
 const ArticleContent = styled.div`
   max-width: 800px;
   margin: 0 auto;
+`
+
+const LoadingContainer = styled.div`
+  text-align: center;
+  margin-top: 70px;
 `
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)

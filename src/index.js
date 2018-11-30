@@ -9,11 +9,14 @@ import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
 import reducers from './reducers';
+import { inintFetch } from './api/github';
 
 const store = createStore(
   reducers,
   applyMiddleware(thunk, logger)
 )
+
+inintFetch(store.dispatch)
 
 ReactDOM.render(
   <Provider store={store}>

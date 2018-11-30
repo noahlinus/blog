@@ -5,7 +5,6 @@ import { Pagination, Spin } from 'antd'
 import TagList from '../common/TagList'
 import { withRouter } from 'react-router-dom'
 
-
 class ArticleList extends Component {
   handleArticleClick(number) {
     this.props.history.push({
@@ -24,9 +23,9 @@ class ArticleList extends Component {
           {this.reviewText(item.body)}
         </PostContentPreview>
       </PostContentData>
-      <PostMeta>
+      <PostDate>
         Posted by lindayuan on {moment(item.created_at).format("YYYY-MM-DD")}
-      </PostMeta>
+      </PostDate>
       <TagContainer>
         <TagList tags={item.labels} />
       </TagContainer>
@@ -37,8 +36,8 @@ class ArticleList extends Component {
   reviewText = (text) => `${text.substring(0, 300).replace(/#/g, '')}...`
 
   render() {
-    const { loading, articles } = this.props
-    const { data, pagination } = articles
+    const { articles } = this.props
+    const { loading, data, pagination } = articles
     return (
       <PostContainer>
         {
@@ -102,7 +101,7 @@ const PostContentPreview = styled.div`
   text-overflow: ellipsis;
 `
 
-const PostMeta = styled.p`
+const PostDate = styled.p`
   font-family: 'Lora','Times New Roman',serif;
   color: gray;
   font-size: 18px;

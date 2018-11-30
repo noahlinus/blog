@@ -9,6 +9,11 @@ import Footer from '../components/common/Footer'
 import TopLoadBar from '../components/common/TopLoadBar'
 
 class App extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    console.log(window.location)
+  }
+
   render() {
     const { loading } = this.props
     return (
@@ -33,7 +38,7 @@ const Container = styled.article`
 `
 
 const mapStateToProps = state => ({
-  loading: state.global.loading
+  loading: state.global.loading,
 })
 
 export default connect(

@@ -1,7 +1,6 @@
 import ActionTypes from "../action/actionTypes";
 
 const initArticle = {
-  loading: true,
   articles: {
     data: [],
     pagination: {
@@ -9,6 +8,7 @@ const initArticle = {
       pageSize: 10,
       total: 10,
     },
+    loading: false,
   },
   articleContent: null,
   tags: [],
@@ -37,18 +37,24 @@ const article = (state = initArticle, action) => {
             pageSize: articles.pageSize,
             total,
           },
+          loading: false,
         },
-        loading: false,
       }
     case ActionTypes.GET_ARTICLES:
       return {
         ...state,
-        loading: true,
+        articles: {
+          ...state.articles,
+          loading: true,
+        }
       }
     case ActionTypes.GET_ARTICLES_FAILED:
       return {
         ...state,
-        loading: false,
+        articles: {
+          ...state.articles,
+          loading: false,
+        }
       }
     case ActionTypes.GET_TAGS:
       return {

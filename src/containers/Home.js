@@ -10,7 +10,6 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getArticleList({ current: 1, pageSize: 10 })
-    this.props.getTags()
   }
 
   componentDidUpdate() {
@@ -27,13 +26,12 @@ class Home extends Component {
   }
 
   render() {
-    const { articles, tags, loading } = this.props
+    const { articles, tags } = this.props
     return (
       <HomeContainer>
         <LeftContainer>
           <ArticleList
             articles={articles}
-            loading={loading}
             onChange={this.onChange}
           />
         </LeftContainer>
@@ -70,7 +68,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getArticleList: data => dispatch(getArticleList(data)),
-  getTags: () => dispatch(getTags())
+  getTags: () => dispatch(getTags()),
 })
 
 export default connect(
