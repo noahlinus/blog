@@ -10,6 +10,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getArticleList({ current: 1, pageSize: 10 })
+    this.props.getTags()
   }
 
   componentDidUpdate() {
@@ -55,7 +56,7 @@ const RightContainer = styled.div`
   display: inline-block;
 `
 
-const HomeContainer = styled.div`
+const HomeContainer = styled.article`
   display: flex;
   justify-content: center;
 `

@@ -45,6 +45,7 @@ const Nav = styled.nav`
   position: absolute;
   width: 100%;
   padding: 20px 0px;
+  top: 0;
 `
 const HomeLink = styled(Link)`
   color: #fff;

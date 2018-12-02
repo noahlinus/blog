@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { startLoading } from '../action';
-import { message } from 'antd'
+// import { message } from 'antd'
 
 const OWNER = 'LinYouYuan'
 
@@ -18,7 +18,7 @@ export function inintFetch(dispatch) {
   }, (error) => {
     // 对请求错误做些什么
     dispatch(startLoading(false))
-    message.error(error)
+    // message.error(error)
     return Promise.reject(error);
   });
 
@@ -29,7 +29,7 @@ export function inintFetch(dispatch) {
   }, (error) => {
     // 对响应错误做点什么
     dispatch(startLoading(false))
-    message.error(error)
+    // message.error(error)
     return Promise.reject(error);
   });
 }

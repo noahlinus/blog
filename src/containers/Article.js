@@ -17,8 +17,8 @@ class Article extends Component {
   render() {
     const { articleContent, loading } = this.props
     let value = ''
-    if (articleContent && articleContent.data && articleContent.data.body) {
-      value = articleContent.data.body
+    if (articleContent && articleContent.body) {
+      value = articleContent.body
     }
     return (
       <ArticleContainer>

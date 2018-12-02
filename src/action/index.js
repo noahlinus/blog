@@ -53,7 +53,9 @@ export const getArticleContent = number => async (dispatch, getState) => {
     const [articleContent] = myArticle
     dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent })
   } else {
-    const articleContent = await getSingleIssue(number)
-    dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent })
+    const res = await getSingleIssue(number)
+    if (res.status === 200) {
+      dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent: res.data })
+    }
   }
 }

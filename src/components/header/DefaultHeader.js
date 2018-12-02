@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import Config from '../../config'
+import HeaderImg from '../../assets/images/header-bg.jpg'
 
-const DefaultHeader = ({ title = Config.title, subtitle = Config.subtitle }) => (
-  <HeaderContainer>
-    <Title>{title}</Title>
-    <SubTitle>{subtitle}</SubTitle>
-  </HeaderContainer>
+const DefaultHeader = ({ imgSrc = HeaderImg, title = Config.title, subtitle = Config.subtitle }) => (
+  <Header imgSrc={imgSrc}>
+    <HeaderContainer >
+      <Title>{title}</Title>
+      <SubTitle>{subtitle}</SubTitle>
+    </HeaderContainer>
+  </Header>
 )
 
 const HeaderContainer = styled.div`
@@ -33,6 +36,17 @@ const SubTitle = styled.span`
   font-style: italic;
   font-weight: 100;
   margin: 10px 0 0;
+`
+
+const Header = styled.header`
+  position: relative;
+  background: no-repeat center center;
+  background-image: url(${(props) => props.imgSrc});
+  background-color: #666;
+  width: 100%;
+  background-attachment: scroll;
+  text-shadow: 3px 3px 10px #000;
+  background-size: cover;
 `
 
 export default DefaultHeader
