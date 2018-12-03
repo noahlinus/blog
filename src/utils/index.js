@@ -12,3 +12,7 @@ export function scrollTop() {
     }
   }, 25);
 }
+
+export function hexToRgba(hex, opacity = 1) {
+  return "rgba(" + parseInt("0x" + hex.slice(0, 2)) + "," + parseInt("0x" + hex.slice(2, 4)) + "," + parseInt("0x" + hex.slice(4, 6)) + "," + opacity + ")";
+}

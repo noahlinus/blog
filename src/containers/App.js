@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HeaderLayout from '../components/header/HeaderLayout'
 import { BackTop } from 'antd'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -15,9 +14,8 @@ class App extends Component {
       <Router>
         <div>
           <TopLoadBar loading={loading} />
-          <HeaderLayout />
-          <Navigation />
           <Routers />
+          <Navigation />
           <BackTop />
           <Footer />
         </div>

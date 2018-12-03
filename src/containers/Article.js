@@ -4,6 +4,7 @@ import Markdown from '../components/article/Markdown'
 import { connect } from 'react-redux'
 import { getArticleContent } from '../action';
 import { Spin } from 'antd';
+import ArticleHeader from '../components/header/ArticleHeader';
 
 class Article extends Component {
   componentDidMount() {
@@ -21,18 +22,26 @@ class Article extends Component {
       value = articleContent.body
     }
     return (
-      <ArticleContainer>
-        <ArticleContent>
-          {loading ?
-            <LoadingContainer>
-              <Spin size="large" />
-            </LoadingContainer> :
-            <Markdown
-              value={value}
-            />
-          }
-        </ArticleContent>
-      </ArticleContainer>
+      <div>
+        <ArticleHeader
+          title={articleContent.title}
+          date={articleContent.created_at}
+          tags={articleContent.labels}
+        />
+        <ArticleContainer>
+          <ArticleContent>
+            {loading ?
+              <LoadingContainer>
+                <Spin size="large" />
+              </LoadingContainer> :
+              <Markdown
+                value={value}
+              />
+            }
+          </ArticleContent>
+        </ArticleContainer>
+      </div>
+
     )
   }
 }

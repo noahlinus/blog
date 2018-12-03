@@ -1,26 +1,28 @@
 
 import React from 'react'
 import styled from 'styled-components'
+import moment from 'moment'
 import TagList from '../common/TagList'
 import HeaderImg from '../../assets/images/header-bg.jpg'
-import { connect } from 'react-redux'
+import Config from '../../config';
 
 const ArticleHeader = ({ imgSrc = HeaderImg, title = '', date = '', tags = [] }) => (
   <Header imgSrc={imgSrc}>
     <HeaderContainer>
+      <TagList tags={tags} opacity={0.4} textColor="#fff"/>
       <Title>{title}</Title>
-      <TagList
-        tags={tags}
-      />
-      <PostDate>{date}</PostDate>
+      {date &&
+        <PostDate>
+          Posted by {Config.author} on {moment(date).format('YYYY-MM-DD')}
+        </PostDate>}
     </HeaderContainer>
   </Header>
 )
 
 const HeaderContainer = styled.div`
   position: relative;
-  max-width: 1000px;
-  padding: 80px 0 300px;
+  max-width: 800px;
+  padding: 150px 0;
   margin: 0 auto;
 `
 
@@ -28,7 +30,9 @@ const Title = styled.h1`
   font-size: 55px;
   line-height: 1.1;
   font-weight: 700;
+  margin: 20px 0 24px;
   color: #fff;
+  text-shadow: 3px 3px 10px #000;
 `
 
 const PostDate = styled.p`
@@ -36,6 +40,8 @@ const PostDate = styled.p`
   font-style: italic;
   font-weight: 300;
   font-size: 20px;
+  color: #fff;
+  text-shadow: 3px 3px 10px #000;
 `
 
 const Header = styled.header`
@@ -45,15 +51,8 @@ const Header = styled.header`
   background-color: #666;
   width: 100%;
   background-attachment: scroll;
-  text-shadow: 3px 3px 10px #000;
   background-size: cover;
 `
-const mapStateToProps = state => (
-  {
-    articleContent: state.article.articleContent,
-    // loading: state.global.loading
-  }
-)
 
 // const SubTitle = styled.span`
 //   font-size: 18px;
@@ -66,4 +65,4 @@ const mapStateToProps = state => (
 //   margin: 10px 0 0;
 // `
 
-export default connect(mapStateToProps)(ArticleHeader)
+export default ArticleHeader

@@ -6,6 +6,10 @@ const OWNER = 'LinYouYuan'
 
 const REPO = 'linyouyuan.github.io'
 
+// const ClinentId = '4ffdab40928a17894f95'
+
+// const Client_Secret = 'a4d7d6f66c6458527588f307c2a7274369e4c61a'
+
 const fetch = axios.create({
   baseURL: `https://api.github.com/repos/${OWNER}/${REPO}/`,
 })

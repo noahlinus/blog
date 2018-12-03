@@ -1,7 +1,7 @@
 const Config = {
   title: "Dayuan's Blog",
   subtitle: "it's better to burn out than to fade away",
-  author: 'lindayuan',
+  author: 'LinDayuan',
   introduce: "Hi, i'm LinDayuan",
   userInline: [
     {

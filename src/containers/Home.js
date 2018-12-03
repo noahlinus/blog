@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { getArticleList, getTags } from '../action'
 import ArticleList from '../components/articlelist/ArticleList'
 import UserInfo from '../components/articlelist/UserInfo';
+import DefaultHeader from '../components/header/DefaultHeader';
 
 class Home extends Component {
   willCurrent = -1
@@ -29,19 +30,22 @@ class Home extends Component {
   render() {
     const { articles, tags } = this.props
     return (
-      <HomeContainer>
-        <LeftContainer>
-          <ArticleList
-            articles={articles}
-            onChange={this.onChange}
-          />
-        </LeftContainer>
-        <RightContainer>
-          <UserInfo
-            tags={tags}
-          />
-        </RightContainer>
-      </HomeContainer>
+      <div>
+        <DefaultHeader/>
+        <HomeContainer>
+          <LeftContainer>
+            <ArticleList
+              articles={articles}
+              onChange={this.onChange}
+            />
+          </LeftContainer>
+          <RightContainer>
+            <UserInfo
+              tags={tags}
+            />
+          </RightContainer>
+        </HomeContainer>
+      </div>
     )
   }
 }

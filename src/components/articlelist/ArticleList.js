@@ -4,6 +4,7 @@ import moment from 'moment'
 import { Pagination, Spin } from 'antd'
 import TagList from '../common/TagList'
 import { withRouter } from 'react-router-dom'
+import Config from '../../config'
 
 class ArticleList extends Component {
   handleArticleClick(number) {
@@ -24,7 +25,7 @@ class ArticleList extends Component {
         </PostContentPreview>
       </PostContentData>
       <PostDate>
-        Posted by lindayuan on {moment(item.created_at).format("YYYY-MM-DD")}
+        Posted by {Config.author} on {moment(item.created_at).format("YYYY-MM-DD")}
       </PostDate>
       <TagContainer>
         <TagList tags={item.labels} />

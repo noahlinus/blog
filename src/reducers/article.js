@@ -10,7 +10,12 @@ const initArticle = {
     },
     loading: false,
   },
-  articleContent: null,
+  articleContent: {
+    title: '',
+    body: '',
+    tags: [],
+    created_at: '',
+  },
   tags: [],
 }
 

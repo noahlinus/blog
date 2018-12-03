@@ -25,6 +25,7 @@ const Title = styled.h1`
   line-height: 1.1;
   font-weight: 700;
   color: #fff;
+  text-shadow: 3px 3px 10px #000;
 `
 
 const SubTitle = styled.span`
@@ -45,7 +46,6 @@ const Header = styled.header`
   background-color: #666;
   width: 100%;
   background-attachment: scroll;
-  text-shadow: 3px 3px 10px #000;
   background-size: cover;
 `
 
