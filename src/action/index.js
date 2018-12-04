@@ -49,6 +49,7 @@ export const getTags = () => async (dispatch) => {
 export const getArticleContent = number => async (dispatch, getState) => {
   const { articles } = getState().article
   const myArticle = articles.data.filter((item) => item.number === number)
+  console.log('myArticle', myArticle)
   if (myArticle.length > 0) {
     const [articleContent] = myArticle
     dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent })

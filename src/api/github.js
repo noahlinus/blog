@@ -2,9 +2,9 @@ import axios from 'axios'
 import { startLoading } from '../action';
 // import { message } from 'antd'
 
-const OWNER = 'LinYouYuan'
+const OWNER = 'lifesinger'//'LinYouYuan'
 
-const REPO = 'linyouyuan.github.io'
+const REPO = 'lifesinger.github.com'//'linyouyuan.github.io'
 
 // const ClinentId = '4ffdab40928a17894f95'
 

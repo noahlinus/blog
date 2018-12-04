@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
-import { Pagination, Spin } from 'antd'
+import { Spin } from 'antd'
 import TagList from '../common/TagList'
 import { withRouter } from 'react-router-dom'
 import Config from '../../config'
 
 class ArticleList extends Component {
+  postContainerRef = React.createRef();
+
   handleArticleClick(number) {
     this.props.history.push({
       pathname: '/article',
@@ -36,24 +38,26 @@ class ArticleList extends Component {
 
   reviewText = (text) => `${text.substring(0, 300).replace(/#/g, '')}...`
 
+  handleScroll = () => {
+    const div = this.postContainerRef.current
+    console.log(div.offsetTop +','+div.clientHeight + ','+  document.documentElement.scrollTop)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
+
   render() {
     const { articles } = this.props
-    const { loading, data, pagination } = articles
+    const { loading, data } = articles
     return (
-      <PostContainer>
+      <PostContainer ref={this.postContainerRef}>
         {
           this.renderList(data)
-        }
-        {
-          pagination.total > pagination.pageSize &&
-          <PaginationContainer>
-            <Pagination
-              current={pagination.current}
-              pageSize={pagination.pageSize}
-              total={pagination.total}
-              onChange={this.props.onChange}
-            />
-          </PaginationContainer>
         }
         {
           loading &&
@@ -108,15 +112,6 @@ const PostDate = styled.p`
   font-size: 18px;
   margin: 5px;
   font-style: italic;
-`
-
-const PaginationContainer = styled.div`
-  margin: 20px auto;
-  text-align: center;
-  position: relative;
-  .ant-pagination {
-    display: inline-block;
-  }
 `
 
 const LoadingLayout = styled.div`

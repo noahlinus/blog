@@ -12,7 +12,7 @@ class Article extends Component {
     let { search } = this.props.location
     if (search) {
       const number = search.substring(1)
-      this.props.getArticleContent(number)
+      this.props.getArticleContent(Number(number))
     }
   }
 

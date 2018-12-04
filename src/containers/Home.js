@@ -7,23 +7,12 @@ import UserInfo from '../components/articlelist/UserInfo';
 import DefaultHeader from '../components/header/DefaultHeader';
 
 class Home extends Component {
-  willCurrent = -1
-
   componentDidMount() {
     this.props.getArticleList({ current: 1, pageSize: 10 })
     this.props.getTags()
   }
 
-  componentDidUpdate() {
-    const { pagination } = this.props.articles
-    if (this.willCurrent === pagination.current) {
-      this.willCurrent = -1
-      window.scrollTo(0, 0)
-    }
-  }
-
   onChange = (current, pageSize) => {
-    this.willCurrent = current
     this.props.getArticleList({ current, pageSize })
   }
 

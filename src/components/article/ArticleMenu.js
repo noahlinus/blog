@@ -11,9 +11,9 @@ class ArticleMenu extends Component {
           <ul>
             {
               menuList.map((item, index) =>
-                <li key={`${index}`}>
+                <AsideLi key={`${index}`} count={item.count} showIcon={item.count === 1 || item.count === 2}>
                   <a href={`#${item.data}`}>{item.data}</a>
-                </li>)
+                </AsideLi>)
             }
           </ul>
         </Affix>
@@ -26,26 +26,38 @@ const Aside = styled.aside`
   display: inline-block;
   position: absolute;
   margin-left: 30px;
-  color: #5f5f5f;
+  color: #777;
+  font-weight: 700;
   ul {
     list-style:none;
     padding-left: 0px;
     margin-top: 50px;
-    border-left: 1px solid #666;
+    border-left: 1px solid #eee;
   } 
-  li{
-    margin-left: 0px;
-    &:before{
-      position: relative;
-      top: 0;
-      left: -4px;
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      content: '';
-      border-radius: 50%;
-      background-color: #0cc;
+`
+const AsideLi = styled.li`
+  margin: 5px 0;
+  a {
+    color: #777;
+    &:hover {
+      color: #3194d0;
     }
+    &:active {
+      color: #51F4F0;
+    }
+  }
+  &:before{
+    position: relative;
+    top: 0;
+    left: -4px;
+    display: inline-block;
+    width: 7px;
+    margin-right: ${props => props.count * 10}px;
+    height: 7px;
+    content: '';
+    opacity:${props => props.count === 1 || props.count === 2 ? 1 : 0};
+    border-radius: 50%;
+    background-color: #FFE4C4;
   }
 `
 
