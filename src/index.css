@@ -7,7 +7,3 @@ body {
     color: #404040;
     overflow-x: hidden;
 }
-
-body ::selection {
-    background: #83d7fe;
-}

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getArticleContent } from '../action';
 import { Spin } from 'antd';
 import ArticleHeader from '../components/header/ArticleHeader';
+import ArticleMenu from '../components/article/ArticleMenu';
 
 class Article extends Component {
   componentDidMount() {
@@ -17,16 +18,14 @@ class Article extends Component {
 
   render() {
     const { articleContent, loading } = this.props
-    let value = ''
-    if (articleContent && articleContent.body) {
-      value = articleContent.body
-    }
+    const { data, menuList } = articleContent
+    const value = data.body
     return (
       <div>
         <ArticleHeader
-          title={articleContent.title}
-          date={articleContent.created_at}
-          tags={articleContent.labels}
+          title={data.title}
+          date={data.created_at}
+          tags={data.labels}
         />
         <ArticleContainer>
           <ArticleContent>
@@ -38,6 +37,9 @@ class Article extends Component {
                 value={value}
               />
             }
+            <ArticleMenu
+              menuList={menuList}
+            />
           </ArticleContent>
         </ArticleContainer>
       </div>

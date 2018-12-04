@@ -11,10 +11,13 @@ const initArticle = {
     loading: false,
   },
   articleContent: {
-    title: '',
-    body: '',
-    tags: [],
-    created_at: '',
+    data: {
+      title: '',
+      body: '',
+      tags: [],
+      created_at: '',
+    },
+    menuList: [],
   },
   tags: [],
 }
@@ -67,9 +70,23 @@ const article = (state = initArticle, action) => {
         tags: action.tags
       }
     case ActionTypes.GET_ARTICLE_CONTENT:
+      const menuList = []
+      if (action.articleContent && action.articleContent.body) {
+        const headline = /^(#{1,6})([^#\n]+)$/m
+        let str = action.articleContent.body
+        let stra
+        while ((stra = headline.exec(str)) !== null) {
+          const count = stra[1].length;
+          menuList.push({ count, data: stra[2].trim() })
+          str = str.replace(stra[0], '')
+        }
+      }
       return {
         ...state,
-        articleContent: action.articleContent
+        articleContent: {
+          data: action.articleContent,
+          menuList,
+        }
       }
     default:
       return state

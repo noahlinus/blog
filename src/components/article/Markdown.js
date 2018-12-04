@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import ReactMarkdown from 'react-markdown'
 import CodeBlock from './CodeBlock'
 import styled from 'styled-components'
+import HeadingBlock from './HeadingBlock';
 
 const MarkDownContainer = styled.section`
+  display: inline-block;
   color: #2f2f2f;
   word-break: break-word !important;
   word-break: break-all;
@@ -195,6 +197,7 @@ class Markdown extends Component {
           source={value}
           renderers={{
             code: CodeBlock,
+            heading: HeadingBlock,
           }}
         />
       </MarkDownContainer>
