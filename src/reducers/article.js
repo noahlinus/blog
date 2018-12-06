@@ -16,8 +16,18 @@ const initArticle = {
       body: '',
       tags: [],
       created_at: '',
+      comments: 0,
     },
     menuList: [],
+  },
+  comments: {
+    data: [],
+    loading: false,
+    pagination: {
+      current: 1,
+      pageSize: 10,
+      total: 10,
+    },
   },
   tags: [],
 }
@@ -30,10 +40,11 @@ const article = (state = initArticle, action) => {
       const { link } = articles
       if (link) {
         let linkData = getLinkData(link)
+        console.log(linkData)
         if (linkData['last']) {
-          total = linkData['last'].page * linkData['last'].per_page
+          total = linkData['last'].page * articles.pageSize
         } else if (linkData['prev']) {
-          total = linkData['prev'].page * linkData['prev'].per_page + Number(linkData['prev'].per_page)
+          total = linkData['prev'].page * articles.pageSize + articles.pageSize
         }
       }
       return {
@@ -86,6 +97,14 @@ const article = (state = initArticle, action) => {
         articleContent: {
           data: action.articleContent,
           menuList,
+        }
+      }
+    case ActionTypes.GET_COMMENTS:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          ...action.comments
         }
       }
     default:

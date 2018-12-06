@@ -6,6 +6,11 @@ const OWNER = 'lifesinger'//'LinYouYuan'
 
 const REPO = 'lifesinger.github.com'//'linyouyuan.github.io'
 
+
+// const OWNER = 'LinYouYuan'
+
+// const REPO = 'linyouyuan.github.io'
+
 // const ClinentId = '4ffdab40928a17894f95'
 
 // const Client_Secret = 'a4d7d6f66c6458527588f307c2a7274369e4c61a'
@@ -43,3 +48,5 @@ export const getIssues = (params) => fetch.get('/issues', { params })
 export const getLabels = (params) => fetch.get('/labels', { params })
 
 export const getSingleIssue = (number) => fetch.get(`/issues/${number}`)
+
+export const getIssuesComments = (number, params) => fetch.get(`/issues/${number}/comments`, { params })

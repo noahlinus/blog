@@ -61,6 +61,7 @@ export default class CodeBlock extends React.PureComponent {
 
 const CodeBlockContainer = styled.div`
   position: relative;
+  width: 800px;
   &:hover .icon-copy {
     display: inline-block;
   }

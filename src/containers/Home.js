@@ -13,6 +13,7 @@ class Home extends Component {
   }
 
   onChange = (current, pageSize) => {
+    window.location.href = "#home-container";
     this.props.getArticleList({ current, pageSize })
   }
 
@@ -21,7 +22,7 @@ class Home extends Component {
     return (
       <div>
         <DefaultHeader/>
-        <HomeContainer>
+        <HomeContainer id="home-container">
           <LeftContainer>
             <ArticleList
               articles={articles}

@@ -1,5 +1,5 @@
 import ActionTypes from "./actionTypes"
-import { getIssues, getLabels, getSingleIssue } from '../api/github'
+import { getIssues, getLabels, getSingleIssue, getIssuesComments } from '../api/github'
 
 export const getArticleList = articles => async (dispatch) => {
   const { current, pageSize } = articles
@@ -46,10 +46,10 @@ export const getTags = () => async (dispatch) => {
   }
 }
 
-export const getArticleContent = number => async (dispatch, getState) => {
+export const getArticleContent = (number) => async (dispatch, getState) => {
   const { articles } = getState().article
   const myArticle = articles.data.filter((item) => item.number === number)
-  console.log('myArticle', myArticle)
+  window.scrollTo(0, 0)
   if (myArticle.length > 0) {
     const [articleContent] = myArticle
     dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent })
@@ -58,5 +58,19 @@ export const getArticleContent = number => async (dispatch, getState) => {
     if (res.status === 200) {
       dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent: res.data })
     }
+  }
+}
+
+export const getComments = (number, { current = 1, pageSize = 10 }) => async (dispatch, getState) => {
+  const total = getState().article.articleContent.data.comments
+  dispatch({ type: ActionTypes.GET_COMMENTS, comments: { loading: true } })
+  const res = await getIssuesComments(number, {
+    page: current,
+    per_page: pageSize,
+  })
+  if (res.status === 200) {
+    dispatch({ type: ActionTypes.GET_COMMENTS, comments: { data: res.data, loading: false, pagination: { current, pageSize, total } } })
+  } else {
+    dispatch({ type: ActionTypes.GET_COMMENTS, comments: { loading: false } })
   }
 }

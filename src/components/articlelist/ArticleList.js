@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
-import { Spin } from 'antd'
+import { Pagination, Spin } from 'antd'
 import TagList from '../common/TagList'
 import { withRouter } from 'react-router-dom'
 import Config from '../../config'
 
 class ArticleList extends Component {
-  postContainerRef = React.createRef();
-
   handleArticleClick(number) {
     this.props.history.push({
       pathname: '/article',
@@ -36,33 +34,40 @@ class ArticleList extends Component {
     </PostContent>
   ))
 
-  reviewText = (text) => `${text.substring(0, 300).replace(/#/g, '')}...`
-
-  handleScroll = () => {
-    const div = this.postContainerRef.current
-    console.log(div.offsetTop +','+div.clientHeight + ','+  document.documentElement.scrollTop)
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    window.addEventListener('scroll', this.handleScroll.bind(this));
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll.bind(this));
+  reviewText = (text) => {
+    let revText = `${text.substring(0, 300).replace(/#/g, '')}...`
+    const links = /!?\[([^\]<>]+)\]\(([^ )<>]+)( "[^()"]+")?\)/g
+    let stra
+    while ((stra = links.exec(revText)) !== null) {
+      console.log(stra)
+      revText = revText.replace(stra[0],'')
+    }
+    return revText
   }
 
   render() {
     const { articles } = this.props
-    const { loading, data } = articles
+    const { loading, data, pagination } = articles
     return (
-      <PostContainer ref={this.postContainerRef}>
+      <PostContainer>
         {
           this.renderList(data)
         }
         {
+          pagination.total > pagination.pageSize &&
+          <PaginationContainer>
+            <Pagination
+              current={pagination.current}
+              pageSize={pagination.pageSize}
+              total={pagination.total}
+              onChange={this.props.onChange}
+            />
+          </PaginationContainer>
+        }
+        {
           loading &&
           <LoadingLayout>
-            <Spin size="large" />
+            <Spin />
           </LoadingLayout>
         }
       </PostContainer>
@@ -71,7 +76,7 @@ class ArticleList extends Component {
 }
 
 const PostContainer = styled.div`
-  margin: 30px 0 120px;
+  margin: 30px 0 50px;
   min-height: 200px;
   position: relative;
 `
@@ -127,6 +132,15 @@ const LoadingLayout = styled.div`
 `
 const TagContainer = styled.div`
   margin-left: 2px;
+`
+
+const PaginationContainer = styled.div`
+  margin: 20px auto;
+  text-align: center;
+  position: relative;
+  .ant-pagination {
+    display: inline-block;
+  }
 `
 
 export default withRouter(ArticleList)

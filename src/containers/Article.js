@@ -2,17 +2,22 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Markdown from '../components/article/Markdown'
 import { connect } from 'react-redux'
-import { getArticleContent } from '../action';
+import { getArticleContent, getComments } from '../action';
 import { Spin } from 'antd';
 import ArticleHeader from '../components/header/ArticleHeader';
 import ArticleMenu from '../components/article/ArticleMenu';
 
 class Article extends Component {
   componentDidMount() {
+    this.getArticle()
+  }
+
+  async getArticle() {
     let { search } = this.props.location
     if (search) {
-      const number = search.substring(1)
-      this.props.getArticleContent(Number(number))
+      const number = Number(search.substring(1))
+      await this.props.getArticleContent(number)
+      await this.props.getComments(number, { pageSize: 10, current: 1 })
     }
   }
 
@@ -31,7 +36,7 @@ class Article extends Component {
           <ArticleContent>
             {loading ?
               <LoadingContainer>
-                <Spin size="large" />
+                <Spin />
               </LoadingContainer> :
               <Markdown
                 value={value}
@@ -56,7 +61,8 @@ const mapStateToProps = state => (
 )
 
 const mapDispatchToProps = dispatch => ({
-  getArticleContent: (number) => dispatch(getArticleContent(number))
+  getArticleContent: (number) => dispatch(getArticleContent(number)),
+  getComments: (number, params) => dispatch(getComments(number, params))
 })
 
 const ArticleContainer = styled.article`
