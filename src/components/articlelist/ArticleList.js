@@ -36,10 +36,9 @@ class ArticleList extends Component {
 
   reviewText = (text) => {
     let revText = `${text.substring(0, 300).replace(/#/g, '')}...`
-    const links = /!?\[([^\]<>]+)\]\(([^ )<>]+)( "[^()"]+")?\)/g
+    const links = /!\[\]\((.*?)\)/g
     let stra
     while ((stra = links.exec(revText)) !== null) {
-      console.log(stra)
       revText = revText.replace(stra[0],'')
     }
     return revText

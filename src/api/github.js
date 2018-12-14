@@ -2,14 +2,14 @@ import axios from 'axios'
 import { startLoading } from '../action';
 // import { message } from 'antd'
 
-const OWNER = 'lifesinger'//'LinYouYuan'
+// const OWNER = 'lifesinger'//'LinYouYuan'
 
-const REPO = 'lifesinger.github.com'//'linyouyuan.github.io'
+// const REPO = 'lifesinger.github.com'//'linyouyuan.github.io'
 
 
-// const OWNER = 'LinYouYuan'
+const OWNER = 'LinYouYuan'
 
-// const REPO = 'linyouyuan.github.io'
+const REPO = 'linyouyuan.github.io'
 
 // const ClinentId = '4ffdab40928a17894f95'
 
