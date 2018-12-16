@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/styles/hljs'
+import atomOneDark from 'react-syntax-highlighter/dist/styles/hljs/atom-one-dark'; 
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Tooltip, Icon } from 'antd'
 import styled from 'styled-components'
