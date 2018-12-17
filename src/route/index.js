@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Switch, Route } from 'react-router-dom'
 import Home from '../containers/Home'
-import Tags from '../containers/Tags';
-import About from '../containers/About';
-import Article from '../containers/Article';
+import Tags from '../containers/Tags'
+import About from '../containers/About'
+import Article from '../containers/Article'
 
 function Routers() {
   return (

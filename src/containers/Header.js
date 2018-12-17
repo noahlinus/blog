@@ -7,7 +7,6 @@ import ArticleHeader from '../components/header/ArticleHeader';
 class Header extends Component {
   render() {
     const { articleContent } = this.props
-    console.log('饼干')
     return (
       <Switch>
         <Route exact={true} path="/" component={() => <DefaultHeader />} />

@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import atomOneDark from 'react-syntax-highlighter/dist/styles/hljs/atom-one-dark'; 
+import PropTypes from 'prop-types'
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import atomOneDark from 'react-syntax-highlighter/dist/styles/hljs/atom-one-dark'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Tooltip, Icon } from 'antd'
 import styled from 'styled-components'
@@ -9,8 +9,10 @@ import styled from 'styled-components'
 import js from 'react-syntax-highlighter/dist/languages/hljs/javascript'
 import java from 'react-syntax-highlighter/dist/languages/hljs/java'
 import json from 'react-syntax-highlighter/dist/languages/hljs/json'
+import css from 'react-syntax-highlighter/dist/languages/hljs/css'
 
 SyntaxHighlighter.registerLanguage('javascript', js);
+SyntaxHighlighter.registerLanguage('css', css);
 SyntaxHighlighter.registerLanguage('java', java);
 SyntaxHighlighter.registerLanguage('json', json);
 /**
