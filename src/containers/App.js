@@ -6,9 +6,15 @@ import Routers from '../route'
 import Navigation from '../components/header/Navigation'
 import Footer from '../components/common/Footer'
 import TopLoadBar from '../components/common/TopLoadBar'
+import MarkdownTest from '../test/MarkdownTest';
+
+const TEST_MK = true
 
 class App extends Component {
   render() {
+    if (TEST_MK) {
+      return <MarkdownTest />
+    }
     const { loading } = this.props
     return (
       <Router>

@@ -19,7 +19,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt')
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-
+const { MyAwesomePlugin } = require('./plugin/MyAwesomePlugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -315,6 +315,10 @@ module.exports = {
               'sass-loader'
             ),
           },
+          {
+            test: /\.md$/,
+            loader: paths.textLoaders,
+          },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.
@@ -408,6 +412,7 @@ module.exports = {
       formatter: typescriptFormatter,
     }),
     // new BundleAnalyzerPlugin()
+    new MyAwesomePlugin()
   ].filter(Boolean),
 
   // Some libraries import Node modules but don't use them in the browser.
