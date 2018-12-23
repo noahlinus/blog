@@ -19,7 +19,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt')
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const { MyAwesomePlugin } = require('./plugin/MyAwesomePlugin');
+const { MarkdwonPlugin } = require('./plugin/markdwonPlugin');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -412,7 +412,7 @@ module.exports = {
       formatter: typescriptFormatter,
     }),
     // new BundleAnalyzerPlugin()
-    new MyAwesomePlugin()
+    new MarkdwonPlugin()
   ].filter(Boolean),
 
   // Some libraries import Node modules but don't use them in the browser.
