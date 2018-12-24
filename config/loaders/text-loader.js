@@ -1,19 +1,10 @@
-const { markdownData } = require('../plugin/markdwonPlugin')
+const { calculatePostData } = require('../../scripts/postbuild')
 
 module.exports = function (content) {
   // this.cacheable && this.cacheable();
-  const stra = content.split('---')[1]
-
-  const headerTemp = stra.split('\n')
-
-  let headerData = {}
-
-  headerTemp.forEach((item) => {
-    const temps = item.split(':')
-    if (temps.length > 1) {
-      headerData[temps[0].trim()] = temps[1].trim()
-    }
-  })
-  markdownData.header[headerData.title] = headerData
+  const path = this.resourcePath
+  const index = path.lastIndexOf('/')
+  const pathName = path.substring(index + 1)
+  calculatePostData(content, pathName)
   return "module.exports = " + JSON.stringify(content);
 }

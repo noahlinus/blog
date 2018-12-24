@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Markdown from '../components/article/Markdown';
 import { Button } from 'antd';
-import articles from '../assets/articles'
+import posts from '../assets/posts'
 
 const MKData = [
   'ES6设计模式-设计原则.md',
@@ -18,7 +18,7 @@ class MarkdownTest extends Component {
   }
 
   async handleClick(text) {
-    console.log(articles)
+    console.log(posts)
     const res = await import(`../_posts/${text}`)
     this.setState({
       value: res.default

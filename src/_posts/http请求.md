@@ -1,7 +1,7 @@
 ---
 title: http请求
 date: 2018-04-29 14:13:56
-tags: http
+tags: http, 性能优化
 header-img: "/img/header_img/content-bg.jpg"
 catalog: true
 ---

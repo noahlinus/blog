@@ -1,5 +1,5 @@
 ---
-title: ES6设计模式 设计原则
+title: ES6设计模式-设计原则
 date: 2018-04-08 21:57:04
 catalog: true
 tags: 设计模式
@@ -15,7 +15,7 @@ header-img: "/img/header_img/content-bg.jpg"
 先了解设计原则
 
 ### 单一职责原则
-
+ 
 应该有且只有一个原因引起类的变化，包括方法和接口
 
 ### 里氏替换原则

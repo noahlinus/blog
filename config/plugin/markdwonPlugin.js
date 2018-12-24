@@ -1,26 +1,9 @@
-const markdownData = {
-  header: {}
-}
-
-const dataTemp = {
-  data: ''
-}
+const { watchBuildPosts } = require('../../scripts/postbuild')
 
 class MarkdwonPlugin {
   onAfterEmit() {
     console.log('onAfterEmit')
-    const fs = require('fs')
-    const path = require('path')
-    const dataString = JSON.stringify(markdownData)
-    if (dataTemp.data !== dataString) {
-      dataTemp.data = dataString
-      fs.writeFile(path.join(__dirname, '../../src/assets/articles.json'), dataString, (err) => {
-        if (err) {
-          console.log(err)
-          return;
-        }
-      })
-    }
+    watchBuildPosts()
   }
 
   apply(compiler) {
@@ -28,8 +11,4 @@ class MarkdwonPlugin {
   }
 };
 
-module.exports = {
-  markdownData,
-  MarkdwonPlugin,
-  dataTemp,
-};
+module.exports = MarkdwonPlugin
