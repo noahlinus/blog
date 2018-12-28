@@ -35,25 +35,14 @@ const initArticle = {
 const article = (state = initArticle, action) => {
   switch (action.type) {
     case ActionTypes.GET_ARTICLES_SUCCESS:
-      let total = action.total
-      const { articles } = action
-      const { link } = articles
-      if (link) {
-        let linkData = getLinkData(link)
-        console.log(linkData)
-        if (linkData['last']) {
-          total = linkData['last'].page * articles.pageSize
-        } else if (linkData['prev']) {
-          total = linkData['prev'].page * articles.pageSize + articles.pageSize
-        }
-      }
+      const { current, pageSize, total, data } = action.articles
       return {
         ...state,
         articles: {
-          data: articles.data,
+          data,
           pagination: {
-            current: articles.current,
-            pageSize: articles.pageSize,
+            current,
+            pageSize,
             total,
           },
           loading: false,

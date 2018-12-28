@@ -24,8 +24,6 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const { MarkdwonPlugin } = require('./plugin/markdwonPlugin');
-
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
 const publicPath = paths.servedPath;
@@ -406,6 +404,10 @@ module.exports = {
               'sass-loader'
             ),
           },
+          {
+            test: /\.md$/,
+            loader: paths.textLoaders,
+          },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
@@ -527,7 +529,6 @@ module.exports = {
       formatter: typescriptFormatter,
     }),
     // new BundleAnalyzerPlugin()
-    new MarkdwonPlugin()
   ].filter(Boolean),
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

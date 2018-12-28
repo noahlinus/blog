@@ -1,39 +1,41 @@
 import React, { Component } from 'react'
 import Markdown from '../components/article/Markdown';
 import { Button } from 'antd';
-import posts from '../assets/posts'
-
-const MKData = [
-  'ES6设计模式-设计原则.md',
-  'http请求.md',
-  'React生命周期详解.md',
-  'TensorFlow-js浏览器的人工智能.md',
-  '使用create-react-app添加css modules.md',
-  '性能优化.md'
-]
+import { getPosts,getPostContent } from '../api/posts'
 
 class MarkdownTest extends Component {
   state = {
+    posts: [],
     value: ''
   }
 
+  componentDidMount() {
+    getPosts(1).then((res) => {
+      console.log(res)
+      this.setState({
+        posts: res.default.data,
+      })
+    })
+  }
+
   async handleClick(text) {
-    console.log(posts)
-    const res = await import(`../_posts/${text}`)
+    const res = await getPostContent(text)
+    console.log(res)
     this.setState({
-      value: res.default
+      value: res.default.content
     })
   }
 
   renderList() {
+    const { posts } = this.state
     return (
       <ul>
-        {MKData.map((text, index) => (
+        {posts.map((item, index) => (
           <li key={`${index}`}>
-            {text}
+            {item.title}
             <Button
               style={{ margin: '5px' }}
-              onClick={() => this.handleClick(text)} >
+              onClick={() => this.handleClick(item.key)} >
               打开
             </Button>
           </li>

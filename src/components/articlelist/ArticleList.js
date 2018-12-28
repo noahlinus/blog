@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import moment from 'moment'
 import { Pagination, Spin } from 'antd'
 import TagList from '../common/TagList'
 import { withRouter } from 'react-router-dom'
@@ -15,20 +14,20 @@ class ArticleList extends Component {
   }
 
   renderList = articles => articles.map((item) => (
-    <PostContent key={`${item.id}`}>
+    <PostContent key={`${item.key}`}>
       <PostContentData onClick={() => this.handleArticleClick(item.number)}>
         <PostTitle>
           {item.title}
         </PostTitle>
         <PostContentPreview>
-          {this.reviewText(item.body)}
+          {item.preview}
         </PostContentPreview>
       </PostContentData>
       <PostDate>
-        Posted by {Config.author} on {moment(item.created_at).format("YYYY-MM-DD")}
+        Posted by {Config.author} on {item.date}
       </PostDate>
       <TagContainer>
-        <TagList tags={item.labels} />
+        <TagList tags={item.tags.split(',')} />
       </TagContainer>
 
     </PostContent>

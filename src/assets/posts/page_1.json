@@ -1,0 +1,44 @@
+[
+    {
+        "title": "使用create-react-app添加css modules",
+        "tags": "React",
+        "date": "2018-07-30 15:30:59",
+        "header-img": "\"/img/header_img/content-bg.jpg\"",
+        "catalog": "true",
+        "key": "使用create-react-app添加css modules.md",
+        "preview": " 前言`createreactapp`是facebook的官方脚手架，对于个人开发者和中小型公司快速创建项目非常推荐。react的CSS解决方案有很多，这里我技术选型时用`css modules`和`sass`，然后配合antd使用通用组件库。但是createreactapp原生并不支持`css modules`和`sass`，所以需要额外配置。 配置 增加css modules和sass 使用e"
+    },
+    {
+        "title": "http请求",
+        "date": "2018-04-29 14:13:56",
+        "tags": "http, 性能优化",
+        "header-img": "\"/img/header_img/content-bg.jpg\"",
+        "key": "http请求.md",
+        "preview": " Http请求的全过程 首先要了解HTTP请求头和相应头 HTTP请求request请求行 请求头 空行 请求数据 请求行包括请求类型，GETPOSTPUTDELETE等，请求访问的资源，最后一部分说明使用的版本比如HTTP11 请求头部请求头一般有以下部分组成 Accept 请求接受类型，比如textjavascript AcceptEncoding 压缩格式，比如gzip Acceptlang"
+    },
+    {
+        "title": "性能优化",
+        "date": "2018-04-25 20:48:00",
+        "tags": "性能优化",
+        "header-img": "\"/img/header_img/content-bg.jpg\"",
+        "catalog": "true",
+        "key": "性能优化.md",
+        "preview": " Web前端性能优化 桌面端优化 减少HTTP资源请求数透过构建工具合并雪碧图、CSS、JS文件。来减少资源的请求，避免重复的资源。 减少HTTP请求大小    除了减少资源次数，也要尽量减小每个HTTP请求的大小。使用gzip压缩传输内容。 将CSS或JavaScript放到外部文件中，避免使用style或script标签直接引入在HTML文件中应用外部资源可以有效的利用浏览器的静态资源缓存``"
+    },
+    {
+        "title": "ES6设计模式-设计原则",
+        "date": "2018-04-08 21:57:04",
+        "tags": "设计模式",
+        "header-img": "\"/img/header_img/content-bg.jpg\"",
+        "key": "ES6设计模式-设计原则.md",
+        "preview": " ES6的设计模式最近看了《javascript高级程序设计》表示很有收获，但是其整篇文章都是用ES5写的，所以我打算对其整理下，并用ES6进行重写。 设计模式6大原则先了解设计原则 单一职责原则 应该有且只有一个原因引起类的变化，包括方法和接口 里氏替换原则只要父类出现的地方子类就一定可以出现，而且替换为子类也不会出现异常。但是子类出现的地方，不一定能使用父类。 依赖倒置原则 高层模块不应该依赖"
+    },
+    {
+        "title": "React生命周期详解",
+        "date": "2018-04-06 17:06:19",
+        "tags": "React",
+        "header-img": "\"/img/header_img/content-bg.jpg\"",
+        "key": "React生命周期详解.md",
+        "preview": " React生命周期图解![React生命周期图解]React生命周期详解react_life_cyclepng 详细说明生命周期包含4种情况：组件初始化装载时候，组件属性改变时候，组件状态改变时候，组件被销毁时候生命周期共提供了10个不同的API。 defaultPropsES6使用defaultProps方法，ES5中getDefaultProps方法。只调用一次，返回对象用于设置默认的pro"
+    }
+]

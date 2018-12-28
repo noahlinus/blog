@@ -8,20 +8,20 @@ import DefaultHeader from '../components/header/DefaultHeader';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.getArticleList({ current: 1, pageSize: 10 })
+    this.props.getArticleList({ current: 1 })
     this.props.getTags()
   }
 
-  onChange = (current, pageSize) => {
+  onChange = (current) => {
     window.location.href = "#home-container";
-    this.props.getArticleList({ current, pageSize })
+    this.props.getArticleList({ current })
   }
 
   render() {
     const { articles, tags } = this.props
     return (
       <div>
-        <DefaultHeader/>
+        <DefaultHeader />
         <HomeContainer id="home-container">
           <LeftContainer>
             <ArticleList
