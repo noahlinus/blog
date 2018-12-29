@@ -1,7 +1,6 @@
 
 import React from 'react'
 import styled from 'styled-components'
-import moment from 'moment'
 import TagList from '../common/TagList'
 import HeaderImg from '../../assets/images/header-bg.jpg'
 import Config from '../../config';
@@ -13,7 +12,7 @@ const ArticleHeader = ({ imgSrc = HeaderImg, title = '', date = '', tags = [] })
       <Title>{title}</Title>
       {date &&
         <PostDate>
-          Posted by {Config.author} on {moment(date).format('YYYY-MM-DD')}
+          Posted by {Config.author} on {date}
         </PostDate>}
     </HeaderContainer>
   </Header>

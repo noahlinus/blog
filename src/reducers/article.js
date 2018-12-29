@@ -14,7 +14,7 @@ const initArticle = {
     data: {
       title: '',
       body: '',
-      tags: [],
+      tags: '',
       created_at: '',
       comments: 0,
     },
@@ -29,7 +29,7 @@ const initArticle = {
       total: 10,
     },
   },
-  tags: [],
+  tags: {},
 }
 
 const article = (state = initArticle, action) => {
@@ -71,9 +71,9 @@ const article = (state = initArticle, action) => {
       }
     case ActionTypes.GET_ARTICLE_CONTENT:
       const menuList = []
-      if (action.articleContent && action.articleContent.body) {
+      if (action.article && action.article.content) {
         const headline = /^(#{1,6})([^#\n]+)$/m
-        let str = action.articleContent.body
+        let str = action.article.content
         let stra
         while ((stra = headline.exec(str)) !== null) {
           const count = stra[1].length;
@@ -84,7 +84,7 @@ const article = (state = initArticle, action) => {
       return {
         ...state,
         articleContent: {
-          data: action.articleContent,
+          data: action.article,
           menuList,
         }
       }
@@ -101,19 +101,19 @@ const article = (state = initArticle, action) => {
   }
 }
 
-function getLinkData(link) {
-  let pagedata = {}
-  link.split(',').forEach(element => {
-    let temp = element.split('?')[1].split(';')
-    let key = temp[1].split('=')[1].replace(/"/g, "")
-    let datas = {}
-    temp[0].split('&').forEach(item => {
-      let data = item.split('=')
-      datas[data[0]] = data[1]
-    })
-    pagedata[key] = datas
-  });
-  return pagedata;
-}
+// function getLinkData(link) {
+//   let pagedata = {}
+//   link.split(',').forEach(element => {
+//     let temp = element.split('?')[1].split(';')
+//     let key = temp[1].split('=')[1].replace(/"/g, "")
+//     let datas = {}
+//     temp[0].split('&').forEach(item => {
+//       let data = item.split('=')
+//       datas[data[0]] = data[1]
+//     })
+//     pagedata[key] = datas
+//   });
+//   return pagedata;
+// }
 
 export default article

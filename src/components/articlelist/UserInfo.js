@@ -6,6 +6,8 @@ import Config from '../../config';
 import TagList from '../common/TagList';
 
 class UserInfo extends Component {
+  getTags = tags => Object.keys(tags).map(text => text)
+
   render() {
     const { tags } = this.props
     return (
@@ -14,7 +16,7 @@ class UserInfo extends Component {
           <Title>
             FEATURED TAGS
           </Title>
-          <TagList tags={tags} />
+          <TagList tags={this.getTags(tags)} />
         </Section>
         <Section>
           <Title>

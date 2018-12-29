@@ -1,11 +1,16 @@
 import React from 'react'
 import { Tag } from 'antd'
 
-const TagList = (tags = []) => (
+function onTagClick(text) {
+  console.log(text)
+}
+
+
+const TagList = ({ tags = [] }) => (
   <div>
     {
       tags.map((text) => (
-        <Tag color="magenta">{text}</Tag>
+        <Tag color="magenta" key={text} onClick={onTagClick(text)}>{text}</Tag>
       ))
     }
   </div>

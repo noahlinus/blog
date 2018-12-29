@@ -1,5 +1,5 @@
 import ActionTypes from "./actionTypes"
-import { getPosts, getPostTags } from "../api/posts";
+import { getPosts, getPostTags, getPostContent } from "../api/posts";
 
 export const getArticleList = articles => async (dispatch) => {
   const { current } = articles
@@ -8,8 +8,8 @@ export const getArticleList = articles => async (dispatch) => {
     const result = await getPosts(current)
     dispatch({
       type: ActionTypes.GET_ARTICLES_SUCCESS,
-      
-      articles: {...result.default}
+
+      articles: { ...result.default }
     })
   } catch (error) {
     dispatch({ type: ActionTypes.GET_ARTICLES_FAILED })
@@ -33,19 +33,10 @@ export const getTags = () => async (dispatch) => {
   }
 }
 
-export const getArticleContent = (number) => async (dispatch, getState) => {
-  const { articles } = getState().article
-  const myArticle = articles.data.filter((item) => item.number === number)
+export const getArticleContent = (key) => async (dispatch) => {
+  const res = await getPostContent(key)
+  dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, article: res.default })
   window.scrollTo(0, 0)
-  if (myArticle.length > 0) {
-    const [articleContent] = myArticle
-    dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent })
-  } else {
-    const res = await getSingleIssue(number)
-    if (res.status === 200) {
-      dispatch({ type: ActionTypes.GET_ARTICLE_CONTENT, articleContent: res.data })
-    }
-  }
 }
 
 export const getComments = (number, { current = 1, pageSize = 10 }) => async (dispatch, getState) => {

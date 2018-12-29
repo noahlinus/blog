@@ -6,16 +6,16 @@ import { withRouter } from 'react-router-dom'
 import Config from '../../config'
 
 class ArticleList extends Component {
-  handleArticleClick(number) {
+  handleArticleClick(key) {
     this.props.history.push({
       pathname: '/article',
-      search: `${number}`
+      search: `${key}`
     })
   }
 
   renderList = articles => articles.map((item) => (
     <PostContent key={`${item.key}`}>
-      <PostContentData onClick={() => this.handleArticleClick(item.number)}>
+      <PostContentData onClick={() => this.handleArticleClick(item.key)}>
         <PostTitle>
           {item.title}
         </PostTitle>

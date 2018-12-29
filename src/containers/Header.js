@@ -6,7 +6,7 @@ import ArticleHeader from '../components/header/ArticleHeader';
 
 class Header extends Component {
   render() {
-    const { articleContent } = this.props
+    const { data } = this.props.articleContent
     return (
       <Switch>
         <Route exact={true} path="/" component={() => <DefaultHeader />} />
@@ -16,9 +16,9 @@ class Header extends Component {
           component={
             () =>
               <ArticleHeader
-                title={articleContent.title}
-                date={articleContent.created_at}
-                tags={articleContent.labels}
+                title={data.title}
+                date={data.date}
+                tags={data.tags}
               />
           }
         />

@@ -8,7 +8,7 @@ import Footer from '../components/common/Footer'
 import TopLoadBar from '../components/common/TopLoadBar'
 import MarkdownTest from '../test/MarkdownTest';
 
-const TEST_MK = true
+const TEST_MK = false
 
 class App extends Component {
   render() {
