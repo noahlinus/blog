@@ -19,6 +19,8 @@ const initArticle = {
       comments: 0,
     },
     menuList: [],
+    isNotFound: false,
+    loading: false,
   },
   comments: {
     data: [],
@@ -69,7 +71,17 @@ const article = (state = initArticle, action) => {
         ...state,
         tags: action.tags
       }
-    case ActionTypes.GET_ARTICLE_CONTENT:
+    case ActionTypes.GET_ARTICLE_CONTENT: {
+      return {
+        ...state,
+        articleContent: {
+          ...state.articleContent,
+          isNotFound: false,
+          loading: true,
+        },
+      }
+    }
+    case ActionTypes.GET_ARTICLE_CONTENT_SUCCESS:
       const menuList = []
       if (action.article && action.article.content) {
         const headline = /^(#{1,6})([^#\n]+)$/m
@@ -86,6 +98,17 @@ const article = (state = initArticle, action) => {
         articleContent: {
           data: action.article,
           menuList,
+          isNotFound: false,
+          loading: false,
+        },
+      }
+    case ActionTypes.GET_ARTICLE_CONTENT_FAILD:
+      return {
+        ...state,
+        articleContent: {
+          ...state.articleContent,
+          isNotFound: true,
+          loading: true,
         }
       }
     case ActionTypes.GET_COMMENTS:

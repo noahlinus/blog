@@ -1,7 +1,7 @@
 import ActionTypes from "../action/actionTypes";
 
 const initGlobal = {
-  loading: false
+  loading: false,
 }
 
 const global = (state= initGlobal, action) => {
@@ -10,6 +10,7 @@ const global = (state= initGlobal, action) => {
       return {
         loading: action.loading
       }
+    
     default:
       return state
   }

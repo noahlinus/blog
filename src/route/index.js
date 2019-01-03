@@ -5,6 +5,7 @@ import Home from '../containers/Home'
 import Tags from '../containers/Tags'
 import About from '../containers/About'
 import Article from '../containers/Article'
+import NotFound from '../containers/NotFound';
 
 function Routers() {
   return (
@@ -12,7 +13,9 @@ function Routers() {
       <Route exact={true} path="/" component={Home} />
       <Route path="/tags" component={Tags} />
       <Route path="/about" component={About} />
-      <Route path="/article" component={Article} />
+      <Route path="/article/:name" component={Article} />
+      <Route path="/404" component={NotFound} />
+      <Route component={NotFound} />
     </Switch>
   )
 }

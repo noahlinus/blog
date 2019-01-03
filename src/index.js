@@ -6,17 +6,20 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 
 import './index.css';
-import App from './containers/App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 import reducers from './reducers';
-import { inintFetch } from './api/github';
+import { setDispatch } from './api/posts';
+// import { inintFetch } from './api/github';
 
 const store = createStore(
   reducers,
   applyMiddleware(thunk, logger)
 )
 
-inintFetch(store.dispatch)
+setDispatch(store.dispatch)
+
+// inintFetch(store.dispatch)
 
 ReactDOM.render(
   <Provider store={store}>

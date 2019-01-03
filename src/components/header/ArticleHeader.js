@@ -4,19 +4,33 @@ import styled from 'styled-components'
 import TagList from '../common/TagList'
 import HeaderImg from '../../assets/images/header-bg.jpg'
 import Config from '../../config';
+import { Spin } from 'antd';
 
-const ArticleHeader = ({ imgSrc = HeaderImg, title = '', date = '', tags = [] }) => (
+const ArticleHeader = ({ imgSrc = HeaderImg, title = '', date = '', tags = [], loading = false }) => (
   <Header imgSrc={imgSrc}>
     <HeaderContainer>
-      <TagList tags={tags} opacity={0.4} textColor="#fff"/>
-      <Title>{title}</Title>
-      {date &&
-        <PostDate>
-          Posted by {Config.author} on {date}
-        </PostDate>}
+      {
+        loading ?
+          <LoadingContainer>
+            <Spin />
+          </LoadingContainer> :
+          <div>
+            <TagList tags={tags} opacity={0.4} textColor="#fff" />
+            <Title>{title}</Title>
+            {date &&
+              <PostDate>
+                Posted by {Config.author} on {date}
+              </PostDate>}
+          </div>
+      }
     </HeaderContainer>
   </Header>
 )
+
+const LoadingContainer = styled.div`
+  text-align: center;
+  padding: 70px;
+`
 
 const HeaderContainer = styled.div`
   position: relative;

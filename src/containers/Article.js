@@ -6,45 +6,49 @@ import { getArticleContent } from '../action';
 import { Spin } from 'antd';
 import ArticleHeader from '../components/header/ArticleHeader';
 import ArticleMenu from '../components/article/ArticleMenu';
+import NotFound from './NotFound';
 
 class Article extends Component {
   componentDidMount() {
+    window.scrollTo(0, 0)
     this.getArticle()
   }
 
   async getArticle() {
-    let { search } = this.props.location
-    if (search) {
-      const key = decodeURIComponent(search.substring(1))
-      await this.props.getArticleContent(key)
+    let { name } = this.props.match.params
+    if (name) {
+      await this.props.getArticleContent(name)
     }
   }
 
   render() {
-    const { articleContent, loading } = this.props
-    const { data, menuList } = articleContent
-    const value = data.content
+    const { articleContent } = this.props
+    const { data, menuList, isNotFound, loading } = articleContent
+    if (isNotFound) {
+      return <NotFound />
+    }
     return (
       <div>
         <ArticleHeader
           title={data.title}
           date={data.date}
           tags={data.tags.split(',')}
+          loading={loading}
         />
         <ArticleContainer>
-          <ArticleContent>
-            {loading ?
-              <LoadingContainer>
-                <Spin />
-              </LoadingContainer> :
+          {loading ?
+            <LoadingContainer>
+              <Spin />
+            </LoadingContainer> :
+            <ArticleContent>
+            
               <Markdown
-                value={value}
+                value={data.content}
               />
-            }
-            <ArticleMenu
-              menuList={menuList}
-            />
-          </ArticleContent>
+              <ArticleMenu
+                menuList={menuList}
+              />
+            </ArticleContent>}
         </ArticleContainer>
       </div>
 

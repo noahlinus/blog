@@ -8,8 +8,7 @@ import Config from '../../config'
 class ArticleList extends Component {
   handleArticleClick(key) {
     this.props.history.push({
-      pathname: '/article',
-      search: `${key}`
+      pathname: `/article/${key.split('.')[0]}`
     })
   }
 

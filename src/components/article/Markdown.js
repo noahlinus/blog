@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import CodeBlock from './CodeBlock'
 import styled from 'styled-components'
 import HeadingBlock from './HeadingBlock';
+import ImageBlock from './ImageBlock';
 
 const MarkDownContainer = styled.section`
   display: inline-block;
@@ -198,6 +199,7 @@ class Markdown extends Component {
           renderers={{
             code: CodeBlock,
             heading: HeadingBlock,
+            image: ImageBlock,
           }}
         />
       </MarkDownContainer>
