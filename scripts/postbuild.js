@@ -17,8 +17,9 @@ const tempPostData = {
 }
 
 const calculatePostData = (content, fileName) => {
+  fileName = path.basename(fileName)
   const contents = content.split('---')
-  const stra = contents[1]
+  const stra = contents[1].trim()
   const headerTemp = stra.split('\n')
   const headerString = headerTemp.filter((item) => item)
   let headerData = {}
@@ -30,8 +31,8 @@ const calculatePostData = (content, fileName) => {
   })
   headerData.key = fileName
   let preview = contents[2].replace(/[#-/\n]/g, '')
-  if (preview.length > 200) {
-    preview = preview.substring(0, 200)
+  if (preview.length > 250) {
+    preview = preview.substring(0, 250) + '...'
   }
   const contentData = { ...headerData, content: contents[2] }
   headerData.preview = preview
