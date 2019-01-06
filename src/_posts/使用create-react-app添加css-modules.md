@@ -1,9 +1,8 @@
 ---
-title: 使用create-react-app添加css modules
+title: 使用create-react-app添加css-modules
 tags: React
 date: 2018-07-30 15:30:59
-header-img: "/img/header_img/content-bg.jpg"
-catalog: true
+header_img: ''
 ---
 
 # 前言
