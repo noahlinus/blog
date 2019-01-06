@@ -10,7 +10,7 @@ const TagList = ({ tags = [] }) => (
   <div>
     {
       tags.map((text) => (
-        <Tag color="magenta" key={text} onClick={() => onTagClick(text)}>{text}</Tag>
+        text && <Tag style={{ marginBottom: '8px' }} color="blue" key={text} onClick={() => onTagClick(text)}>{text}</Tag>
       ))
     }
   </div>
