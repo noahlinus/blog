@@ -1,4 +1,4 @@
-'use strict';
+
 
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
@@ -14,6 +14,11 @@ process.on('unhandledRejection', err => {
 // Ensure environment variables are read.
 require('../config/env');
 
+let overBuild = null
+
+const buildPromise = new Promise((resolve, reject) => {
+  overBuild = {resolve, reject}
+})
 
 const path = require('path');
 const chalk = require('chalk');
@@ -51,6 +56,24 @@ const writeStatsJson = argv.indexOf('--stats') !== -1;
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
+
+function rmBuild() {
+  const files = fs.readdirSync(paths.appBuild)
+  for (let fileName of files) {
+    if (fileName === '.git') {
+      continue;
+    }
+    const filePath = path.join(paths.appBuild, fileName)
+    const stats = fs.statSync(filePath)
+    if (stats.isDirectory()) {
+      fs.emptyDirSync(filePath)
+      fs.rmdirSync(filePath)
+    } else {
+      fs.unlinkSync(filePath)
+    }
+  }
+}
+
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.
@@ -60,7 +83,8 @@ checkBrowsers(paths.appPath, isInteractive)
   .then(previousFileSizes => {
     // Remove all content but keep the directory so that
     // if you're in it, you don't end up in Trash
-    fs.emptyDirSync(paths.appBuild);
+    rmBuild();
+    // fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
@@ -73,13 +97,13 @@ checkBrowsers(paths.appPath, isInteractive)
         console.log(warnings.join('\n\n'));
         console.log(
           '\nSearch for the ' +
-            chalk.underline(chalk.yellow('keywords')) +
-            ' to learn more about each warning.'
+          chalk.underline(chalk.yellow('keywords')) +
+          ' to learn more about each warning.'
         );
         console.log(
           'To ignore, add ' +
-            chalk.cyan('// eslint-disable-next-line') +
-            ' to the line before.\n'
+          chalk.cyan('// eslint-disable-next-line') +
+          ' to the line before.\n'
         );
       } else {
         console.log(chalk.green('Compiled successfully.\n'));
@@ -106,14 +130,17 @@ checkBrowsers(paths.appPath, isInteractive)
         buildFolder,
         useYarn
       );
+      overBuild.resolve()
     },
     err => {
       console.log(chalk.red('Failed to compile.\n'));
       printBuildError(err);
+      overBuild.reject(err)
       process.exit(1);
     }
   )
   .catch(err => {
+    overBuild.reject(err)
     if (err && err.message) {
       console.log(err.message);
     }
@@ -158,7 +185,7 @@ function build(previousFileSizes) {
         console.log(
           chalk.yellow(
             '\nTreating warnings as errors because process.env.CI = true.\n' +
-              'Most CI servers set it automatically.\n'
+            'Most CI servers set it automatically.\n'
           )
         );
         return reject(new Error(messages.warnings.join('\n\n')));
@@ -187,3 +214,5 @@ function copyPublicFolder() {
     filter: file => file !== paths.appHtml,
   });
 }
+
+module.exports = buildPromise
