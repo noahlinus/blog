@@ -21,7 +21,9 @@ class Home extends Component {
     const { articles, tags } = this.props
     return (
       <div>
-        <DefaultHeader />
+        <DefaultHeader
+          imgSrc="header-bg.jpg"
+        />
         <HomeContainer id="home-container">
           <LeftContainer>
             <ArticleList

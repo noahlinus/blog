@@ -2,7 +2,7 @@
 title: http请求
 date: 2018-04-29 14:13:56
 tags: http, 性能优化
-header_img: ''
+header_img: 
 ---
 
 # Http请求的全过程

@@ -1,11 +1,13 @@
-import ActionTypes from "../action/actionTypes";
+import ActionTypes from "../action/actionTypes"
+import Config from "../config"
+import moment from "moment"
 
 const initArticle = {
   articles: {
     data: [],
     pagination: {
       current: 1,
-      pageSize: 10,
+      pageSize: Config.articlePageSize,
       total: 10,
     },
     loading: false,
@@ -13,25 +15,19 @@ const initArticle = {
   articleContent: {
     data: {
       title: '',
-      body: '',
+      date: '',
       tags: '',
-      created_at: '',
-      comments: 0,
+      header_img: '',
     },
     menuList: [],
     isNotFound: false,
     loading: false,
   },
-  comments: {
+  tags: {},
+  tagContent: {
     data: [],
     loading: false,
-    pagination: {
-      current: 1,
-      pageSize: 10,
-      total: 10,
-    },
-  },
-  tags: {},
+  }
 }
 
 const article = (state = initArticle, action) => {
@@ -118,6 +114,50 @@ const article = (state = initArticle, action) => {
           ...state.comments,
           ...action.comments
         }
+      }
+    case ActionTypes.SHOW_TAGS_CONTENT:
+      const { key = 'Show All', tags = {}, loading = false } = action.tag
+      let tag = []
+      if (key === 'Show All') {
+        Object.keys(tags).forEach((key) => {
+          for (const item of tags[key]) {
+            let isOk = true
+            for (const itemTemp of tag) {
+              if (itemTemp.key === item.key) {
+                isOk = false;
+                break;
+              }
+            }
+            if (isOk) {
+              tag.push(item)
+            }
+          }
+        })
+      } else {
+        tag = tags[key]
+      }
+      let mTagTemp = {}
+      for (const item of tag) {
+        let year = item.date.substring(0, 4)
+        if (!mTagTemp[year]) {
+          mTagTemp[year] = []
+        }
+        mTagTemp[year].push(item)
+      }
+      const tagsData = []
+      Object.keys(mTagTemp).forEach((key) => {
+        mTagTemp[key].sort((x, y) => moment(x.date).valueOf() > moment(y.date).valueOf() ? -1 : 1)
+        tagsData.push({ key, data: mTagTemp[key] })
+      })
+      tagsData.sort((x, y) => Number(x.key) > Number(y.key) ? -1 : 1)
+
+      return {
+        ...state,
+        tagContent: {
+          data: tagsData,
+          loading,
+        },
+        tags: tags,
       }
     default:
       return state

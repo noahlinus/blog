@@ -1,16 +1,17 @@
 const fs = require('fs-extra')
 const path = require('path')
-const dirPath = path.join(__dirname, '../src/_posts/')
+const dirPath = path.join(__dirname, '../articles/_posts/')
 const tagsFilePath = path.join(__dirname, '../src/assets/posts/tags.json')
 const moment = require('moment')
+const Config = require('../src/config')
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = Config.articlePageSize
 
 const postData = {
   data: {}
 }
 
-const tagsData = {}
+let tagsData = {}
 
 const tempPostData = {
   data: ''
@@ -36,21 +37,26 @@ const calculatePostData = (content, fileName) => {
   }
   const contentData = { ...headerData, content: contents[2] }
   headerData.preview = preview
-  postData.data[fileName] = headerData
+  if (fileName !== 'index.md') {
+    postData.data[fileName] = headerData
+  }
   return contentData
 }
 
 const calculateTagsData = (posts) => {
+  tagsData = {}
   for (const key in posts) {
     const data = posts[key]
-    const tagSplit = data.tags.split(',')
-    tagSplit.forEach((item) => {
-      item = item.trim()
-      if (!tagsData[item]) {
-        tagsData[item] = []
+    if (data.tags) {
+      const tagSplit = data.tags.split(',')
+      for (let item of tagSplit) {
+        item = item.trim()
+        if (!tagsData[item]) {
+          tagsData[item] = []
+        }
+        tagsData[item].push({ key, date: posts[key].date })
       }
-      tagsData[item].push(key)
-    })
+    }
   }
 }
 
@@ -65,6 +71,7 @@ async function writeTagsToFile(content) {
 }
 
 async function beginBuildPosts() {
+  console.log('---- 开始打包文章 ----')
   try {
     const files = await fs.readdir(dirPath)
     for (const fileName of files) {

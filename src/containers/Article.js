@@ -14,10 +14,10 @@ class Article extends Component {
     this.getArticle()
   }
 
-  async getArticle() {
+  getArticle() {
     let { name } = this.props.match.params
     if (name) {
-      await this.props.getArticleContent(name)
+      this.props.getArticleContent(name)
     }
   }
 

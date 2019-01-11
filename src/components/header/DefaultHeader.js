@@ -1,16 +1,56 @@
-import React from 'react'
+import React, { Component } from 'react';
 import styled from 'styled-components'
 import Config from '../../config'
-import HeaderImg from '../../assets/images/header-bg.jpg'
+import { getTitleImage } from '../../api/posts'
+// import headerBg from '../../../articles/img/header-bg.jpg'
 
-const DefaultHeader = ({ imgSrc = HeaderImg, title = Config.title, subtitle = Config.subtitle }) => (
-  <Header imgSrc={imgSrc}>
-    <HeaderContainer >
-      <Title>{title}</Title>
-      <SubTitle>{subtitle}</SubTitle>
-    </HeaderContainer>
-  </Header>
-)
+class DefaultHeader extends Component {
+  state = {
+    img: '',
+  }
+
+  componentDidMount() {
+    const { imgSrc } = this.props
+    if (imgSrc) {
+      this.getTitleImage(imgSrc)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.imgSrc !== this.props.imgSrc) {
+      const { imgSrc } = nextProps
+      this.getTitleImage(imgSrc)
+    }
+  }
+
+  async getTitleImage(imgSrc) {
+    if (imgSrc) {
+      const imageData = await getTitleImage(imgSrc)
+      this.setState({
+        img: imageData.default,
+      })
+    }
+  }
+
+  render() {
+    const { title = Config.title, subtitle = Config.subtitle } = this.props
+    const { img } = this.state
+    return (
+      <Header imgSrc={img}>
+        <HeaderContainer >
+          <Title>{title}</Title>
+          <SubTitle>{subtitle}</SubTitle>
+        </HeaderContainer>
+      </Header>
+    )
+  }
+}
+
+
+// const LoadingContainer = styled.div`
+//   text-align: center;
+//   padding: 70px;
+// `
 
 const HeaderContainer = styled.div`
   position: relative;

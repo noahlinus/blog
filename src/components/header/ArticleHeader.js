@@ -1,32 +1,64 @@
 
-import React from 'react'
+import React, { Component } from 'react';
 import styled from 'styled-components'
 import TagList from '../common/TagList'
-import HeaderImg from '../../assets/images/header-bg.jpg'
 import Config from '../../config';
 import { Spin } from 'antd';
+import { getTitleImage } from '../../api/posts';
+import headerBg from '../../../articles/img/index-bg.png'
 
-const ArticleHeader = ({ imgSrc = HeaderImg, title = '', date = '', tags = [], loading = false }) => (
-  <Header imgSrc={imgSrc}>
-    <HeaderContainer>
-      {
-        loading ?
-          <LoadingContainer>
-            <Spin />
-          </LoadingContainer> :
-          <div>
-            <TagList tags={tags} opacity={0.4} textColor="#fff" />
-            <Title>{title}</Title>
-            {date &&
-              <PostDate>
-                Posted by {Config.author} on {date}
-              </PostDate>}
-          </div>
-      }
-    </HeaderContainer>
-  </Header>
-)
+class ArticleHeader extends Component {
+  state = {
+    img: headerBg,
+  }
 
+  componentDidMount() {
+    const { imgSrc } = this.props
+    if (imgSrc) {
+      this.getTitleImage(imgSrc)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.imgSrc !== this.props.imgSrc) {
+      const { imgSrc } = nextProps
+      this.getTitleImage(imgSrc)
+    }
+  }
+
+  async getTitleImage(imgSrc) {
+    if (imgSrc) {
+      const imageData = await getTitleImage(imgSrc)
+      this.setState({
+        img: imageData.default,
+      })
+    }
+  }
+  render() {
+    const { title = '', date = '', tags = [], loading = false } = this.props
+    const { img } = this.state
+    return (
+      <Header imgSrc={img}>
+        <HeaderContainer>
+          {
+            loading ?
+              <LoadingContainer>
+                <Spin />
+              </LoadingContainer> :
+              <div>
+                <TagList tags={tags} color="#fff" />
+                <Title>{title}</Title>
+                {date &&
+                  <PostDate>
+                    Posted by {Config.author} on {date}
+                  </PostDate>}
+              </div>
+          }
+        </HeaderContainer>
+      </Header>
+    )
+  }
+}
 const LoadingContainer = styled.div`
   text-align: center;
   padding: 70px;

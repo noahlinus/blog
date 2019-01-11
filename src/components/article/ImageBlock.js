@@ -6,7 +6,7 @@ class ImageBlock extends Component {
   }
   componentDidMount() {
     const { src } = this.props
-    import(`../../_posts/${src}`).then((res) => {
+    import(`../../../articles/_posts/${src}`).then((res) => {
       this.setState({
         src: res.default,
       })
@@ -15,7 +15,7 @@ class ImageBlock extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.src !== nextProps.src) {
       const { src } = this.props
-      import(`../../_posts/${src}`).then((res) => {
+      import(`../../../articles/_posts/${src}`).then((res) => {
         this.setState({
           src: res.default,
         })

@@ -11,7 +11,6 @@ class MarkdownTest extends Component {
 
   componentDidMount() {
     getPosts(1).then((res) => {
-      console.log(res)
       this.setState({
         posts: res.default.data,
       })
@@ -20,7 +19,6 @@ class MarkdownTest extends Component {
 
   async handleClick(text) {
     const res = await getPostContent(text)
-    console.log(res)
     this.setState({
       value: res.default.content
     })

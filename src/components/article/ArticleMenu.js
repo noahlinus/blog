@@ -28,6 +28,7 @@ const Aside = styled.aside`
   margin-left: 30px;
   color: #777;
   font-weight: 700;
+  font-size: 14px;
   ul {
     list-style:none;
     padding-left: 0px;

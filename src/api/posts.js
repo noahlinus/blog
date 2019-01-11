@@ -12,7 +12,6 @@ const postImport = (importPost) => {
       dispatch(startLoading(true))
     }
     importPost.then((res) => {
-      console.log(res)
       resolve(res)
       if (dispatch) {
         dispatch(startLoading(false))
@@ -34,7 +33,14 @@ const getPosts = (page) => postImport(import(`../assets/posts/page_${page}.json`
 const getPostTags = () => postImport(import('../assets/posts/tags.json'))
 
 // 获取文件内容
-const getPostContent = (fileName) => postImport(import(`../_posts/${fileName}`))
+const getPostContent = (fileName) => postImport(import(`../../articles/_posts/${fileName}`))
 
+// 获取关于
+const getAbout = () => postImport(import('../../articles/about/index.md'))
 
-export { setDispatch, getPosts, getPostTags, getPostContent }
+// 获取头部图片
+const getTitleImage = (header_img) => postImport(import(`../../articles/img/${header_img}`))
+
+const getTagPage = () => postImport(import('../../articles/tag/index.md'))
+
+export { setDispatch, getPosts, getPostTags, getPostContent, getAbout, getTitleImage, getTagPage }

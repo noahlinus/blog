@@ -2,7 +2,7 @@
 title: React生命周期详解
 date: 2018-04-06 17:06:19
 tags: React
-header_img: ''
+header_img: 
 ---
 
 # React生命周期图解

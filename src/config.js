@@ -16,7 +16,8 @@ const Config = {
       href: 'https://www.zhihu.com/people/lin-da-yuan-71/activities',
       icon: 'zhihu'
     }
-  ]
+  ],
+  articlePageSize: 10,
 }
 
-export default Config
+module.exports = Config

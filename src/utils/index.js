@@ -13,6 +13,17 @@ export function scrollTop() {
   }, 25);
 }
 
+export function randomNum(minNum, maxNum) {
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * minNum + 1, 10);
+    case 2:
+      return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
+    default:
+      return 0;
+  }
+}
+
 export function hexToRgba(hex, opacity = 1) {
   return "rgba(" + parseInt("0x" + hex.slice(0, 2)) + "," + parseInt("0x" + hex.slice(2, 4)) + "," + parseInt("0x" + hex.slice(4, 6)) + "," + opacity + ")";
 }

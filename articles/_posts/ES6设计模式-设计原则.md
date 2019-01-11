@@ -2,7 +2,7 @@
 title: ES6设计模式-设计原则
 date: 2018-04-08 21:57:04
 tags: 设计模式
-header_img: ''
+header_img: 
 ---
 
 # ES6的设计模式

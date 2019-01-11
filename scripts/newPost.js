@@ -2,7 +2,7 @@ const inquirer = require('inquirer')
 const fs = require('fs-extra')
 const path = require('path')
 const moment = require('moment')
-const postDirPath = path.join(__dirname, '../src/_posts/')
+const postDirPath = path.join(__dirname, '../articles/_posts/')
 
 const PostTemplate = {
   title: '',
