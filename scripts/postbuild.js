@@ -31,7 +31,7 @@ const calculatePostData = (content, fileName) => {
     headerData[key] = value
   })
   headerData.key = fileName
-  let preview = contents[2].replace(/[#-/\n]/g, '')
+  let preview = contents[2].replace(/[#-/\n]/g, '').trim()
   if (preview.length > 250) {
     preview = preview.substring(0, 250) + '...'
   }

@@ -11,12 +11,14 @@ import java from 'react-syntax-highlighter/dist/languages/hljs/java'
 import json from 'react-syntax-highlighter/dist/languages/hljs/json'
 import css from 'react-syntax-highlighter/dist/languages/hljs/css'
 import cpp from 'react-syntax-highlighter/dist/languages/hljs/cpp'
+import rust from 'react-syntax-highlighter/dist/languages/hljs/rust'
 
 SyntaxHighlighter.registerLanguage('javascript', js);
 SyntaxHighlighter.registerLanguage('css', css);
 SyntaxHighlighter.registerLanguage('java', java);
 SyntaxHighlighter.registerLanguage('json', json);
 SyntaxHighlighter.registerLanguage('cpp', cpp);
+SyntaxHighlighter.registerLanguage('cpp', rust);
 
 /**
  * 代码块
