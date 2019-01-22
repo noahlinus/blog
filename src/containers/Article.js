@@ -7,11 +7,13 @@ import { Spin } from 'antd';
 import ArticleHeader from '../components/header/ArticleHeader';
 import ArticleMenu from '../components/article/ArticleMenu';
 import NotFound from './NotFound';
+import Comments from '../components/common/Comments';
 
 class Article extends Component {
   componentDidMount() {
-    window.scrollTo(0, 0)
-    this.getArticle()
+    window.scrollTo(0, 0);
+    this.getArticle();
+    
   }
 
   getArticle() {
@@ -41,14 +43,15 @@ class Article extends Component {
               <Spin />
             </LoadingContainer> :
             <ArticleContent>
-            
+
               <Markdown
                 value={data.content}
               />
               <ArticleMenu
                 menuList={menuList}
               />
-            </ArticleContent>}
+            </ArticleContent >}
+          <Comments/>
         </ArticleContainer>
       </div>
 
