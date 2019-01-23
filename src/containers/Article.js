@@ -3,17 +3,16 @@ import styled from 'styled-components'
 import Markdown from '../components/article/Markdown'
 import { connect } from 'react-redux'
 import { getArticleContent } from '../action';
-import { Spin } from 'antd';
 import ArticleHeader from '../components/header/ArticleHeader';
 import ArticleMenu from '../components/article/ArticleMenu';
 import NotFound from './NotFound';
 import Comments from '../components/common/Comments';
+import Skeleton from '../components/common/Skeleton';
 
 class Article extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.getArticle();
-    
   }
 
   getArticle() {
@@ -40,7 +39,7 @@ class Article extends Component {
         <ArticleContainer>
           {loading ?
             <LoadingContainer>
-              <Spin />
+              <Skeleton />
             </LoadingContainer> :
             <ArticleContent>
 
@@ -51,7 +50,7 @@ class Article extends Component {
                 menuList={menuList}
               />
             </ArticleContent >}
-          <Comments/>
+          <Comments />
         </ArticleContainer>
       </div>
 
@@ -81,8 +80,8 @@ const ArticleContent = styled.div`
 `
 
 const LoadingContainer = styled.div`
-  text-align: center;
-  margin-top: 70px;
+  max-width: 800px;
+  margin: 0 auto;
 `
 
 export default connect(mapStateToProps, mapDispatchToProps)(Article)
