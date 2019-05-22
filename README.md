@@ -1,44 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 用React搭建的博客
 
-## Available Scripts
+## 前言
 
-In the project directory, you can run:
+之前用hexo，突然冒出想用react搭建博客的想法来加强可定制型，才创建了这个项目，这个项目整体样式风格是模范HUX BLOG，我的博客地址：https://linyouyuan.github.io/。
 
-### `npm start`
+## 使用框架
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+主要框架是`react`,`react-router`,`antd`,`sytle-component`，每篇文章都是通过`import()`异步加载的方式加载文章，不会导致首屏加载慢的问题。
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## 使用
 
-### `npm test`
+- npm start
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+启动dev-server调试
 
-### `npm run build`
+- npm run build
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+编译打包
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+- npm run new-post
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+创建文章
 
-### `npm run eject`
+- npm run sync
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+打包发布文章，将要发布的git地址clone到build目录下，然后输入命令就可以打包发布。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 未完成
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1.cli工具
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+创建一个cli工具方便用户直接创建。目前临时方案是，用户可以直接clone我的代码，然后删除掉articles和build文件夹下的内容，然后将用户自己要打包发布的git地址clone到build文件夹下就好。
 
-## Learn More
+2.SEO问题
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+解决单页应用无法SEO的问题。
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3.PWA应用
+
+做成PWA应用。

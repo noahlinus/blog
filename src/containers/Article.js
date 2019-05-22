@@ -34,6 +34,7 @@ class Article extends Component {
           title={data.title}
           date={data.date}
           tags={data.tags.split(',')}
+          imgSrc={data.header_img}
           loading={loading}
         />
         <ArticleContainer>

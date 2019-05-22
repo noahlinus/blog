@@ -93,7 +93,7 @@ const Header = styled.header`
   position: relative;
   background: no-repeat center center;
   background-image: url(${(props) => props.imgSrc});
-  background-color: #666;
+  background-color: #ddd;
   width: 100%;
   background-attachment: scroll;
   background-size: cover;
