@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import atomOneDark from 'react-syntax-highlighter/dist/styles/hljs/atom-one-dark'
@@ -13,14 +13,18 @@ import css from 'react-syntax-highlighter/dist/languages/hljs/css'
 import cpp from 'react-syntax-highlighter/dist/languages/hljs/cpp'
 import rust from 'react-syntax-highlighter/dist/languages/hljs/rust'
 import dart from 'react-syntax-highlighter/dist/languages/hljs/dart'
+import shell from 'react-syntax-highlighter/dist/languages/hljs/shell'
+import typescript from 'react-syntax-highlighter/dist/languages/hljs/typescript'
 
-SyntaxHighlighter.registerLanguage('js', js);
-SyntaxHighlighter.registerLanguage('css', css);
-SyntaxHighlighter.registerLanguage('java', java);
-SyntaxHighlighter.registerLanguage('json', json);
-SyntaxHighlighter.registerLanguage('cpp', cpp);
-SyntaxHighlighter.registerLanguage('cpp', rust);
-SyntaxHighlighter.registerLanguage('dart', dart);
+SyntaxHighlighter.registerLanguage('js', js)
+SyntaxHighlighter.registerLanguage('css', css)
+SyntaxHighlighter.registerLanguage('java', java)
+SyntaxHighlighter.registerLanguage('json', json)
+SyntaxHighlighter.registerLanguage('cpp', cpp)
+SyntaxHighlighter.registerLanguage('cpp', rust)
+SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('shell', shell)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
 
 /**
  * 代码块
@@ -43,7 +47,7 @@ export default class CodeBlock extends React.PureComponent {
     this.setState({ copied: true })
   }
 
-  handleVisibleChange = (visible) => {
+  handleVisibleChange = visible => {
     console.log('handleVisibleChange', visible)
     if (!visible) {
       this.setState({ copied: false })
@@ -51,14 +55,11 @@ export default class CodeBlock extends React.PureComponent {
   }
 
   render() {
-    const { language, value } = this.props;
-    const { copied } = this.state;
+    const { language, value } = this.props
+    const { copied } = this.state
     return (
       <CodeBlockContainer className="code-block">
-        <CopyToClipboard
-          text={value}
-          onCopy={this.handleCopy}
-        >
+        <CopyToClipboard text={value} onCopy={this.handleCopy}>
           <Tooltip
             onVisibleChange={this.handleVisibleChange}
             placement="top"
@@ -71,7 +72,7 @@ export default class CodeBlock extends React.PureComponent {
           {value}
         </SyntaxHighlighter>
       </CodeBlockContainer>
-    );
+    )
   }
 }
 
@@ -89,7 +90,7 @@ const CodeBlockContainer = styled.div`
     font-size: 20px;
     color: #ddd;
     &:active {
-      color: #0000FF;
+      color: #0000ff;
     }
     &:hover {
       color: #3194d0;

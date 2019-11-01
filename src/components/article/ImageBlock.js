@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
+const reURL = /^(https?|ftp|file):\/\/.+$/
 
 class ImageBlock extends Component {
   state = {
@@ -6,28 +8,39 @@ class ImageBlock extends Component {
   }
   componentDidMount() {
     const { src } = this.props
-    import(`../../../articles/_posts/${src}`).then((res) => {
+    if (reURL.test(src)) {
       this.setState({
-        src: res.default,
+        src,
       })
-    })
-  }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.src !== nextProps.src) {
-      const { src } = this.props
-      import(`../../../articles/_posts/${src}`).then((res) => {
+    } else {
+      import(`../../../articles/_posts/${src}`).then(res => {
         this.setState({
           src: res.default,
         })
       })
     }
   }
+
+  componentDidUpdate(preProps) {
+    const { src } = this.props
+    if (src !== preProps.src) {
+      if (reURL.test(src)) {
+        this.setState({
+          src,
+        })
+      } else {
+        import(`../../../articles/_posts/${src}`).then(res => {
+          this.setState({
+            src: res.default,
+          })
+        })
+      }
+    }
+  }
   render() {
     const { src } = this.state
     const { alt } = this.props
-    return (
-      <img src={src} alt={alt} />
-    )
+    return <img src={src} alt={alt} />
   }
 }
 
